@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/* Dark mode toggled via a `.dark` class on <html>, set in layout.tsx before
+   hydration to avoid a flash of the wrong theme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Brand — escala derivada de #C908F9 (hue 288). --brand-600 é a cor de marca. */
+  --brand-50: #faf3fb;
+  --brand-100: #f3e4f7;
+  --brand-200: #ebc2f5;
+  --brand-300: #e588fc;
+  --brand-400: #d84cfb;
+  --brand-500: #c908f9;
+  --brand-600: #b105db;
+  --brand-700: #9004b3;
+  --brand-800: #740490;
+  --brand-900: #600377;
+  --brand-950: #3a0547;
+
+  /* Accent — ciano análogo, usado com moderação em destaques/badges pra não
+     competir com o roxo de marca. */
+  --accent-400: #4cd9fb;
+  --accent-500: #17c4f4;
+  --accent-600: #0da4d0;
+
+  /* Neutros com leve matiz de roxo, pra combinar com a marca em vez de
+     usar um cinza puro. */
+  --background: #ffffff;
+  --foreground: #1c1526;
+  --card: #ffffff;
+  --card-foreground: #1c1526;
+  --muted: #f6f1f9;
+  --muted-foreground: #6b6178;
+  --border: #e9ddf0;
+  --ring: var(--brand-500);
+
+  --success: #16a34a;
+  --danger: #dc2626;
+}
+
+.dark {
+  --background: #121016;
+  --foreground: #f1ecf6;
+  --card: #1a1620;
+  --card-foreground: #f1ecf6;
+  --muted: #211b29;
+  --muted-foreground: #a79bb3;
+  --border: #2c2434;
+  --ring: var(--brand-400);
+
+  --success: #22c55e;
+  --danger: #f87171;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+::selection {
+  background: var(--brand-300);
+  color: var(--brand-950);
+}
+
+/* ============================================================
+   "Sinal diagonal" — motivo de marca recorrente (barras a 135°),
+   usado no logo, cortes de cartão, divisores e botões, no lugar
+   de blobs/pills genéricos. Ver components/Diagonal.tsx.
+
+   Tudo abaixo vive em @layer components: sem isso, essas classes
+   ficam "sem camada" e batem qualquer utilitário do Tailwind
+   (ex.: .absolute), não importa a ordem no arquivo — cascade
+   layers dão prioridade a regras sem @layer sobre as que têm.
+   ============================================================ */
+
+@layer components {
+  .diagonal-lines {
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--brand-500) 0px,
+      var(--brand-500) 2px,
+      transparent 2px,
+      transparent 14px
+    );
+  }
+
+  .diagonal-lines-soft {
+    background-image: repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--brand-500) 45%, transparent) 0px,
+      color-mix(in srgb, var(--brand-500) 45%, transparent) 1.5px,
+      transparent 1.5px,
+      transparent 13px
+    );
+  }
+
+  .diagonal-lines-accent {
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--accent-500) 0px,
+      var(--accent-500) 2px,
+      transparent 2px,
+      transparent 14px
+    );
+  }
+
+  /* Grade de pontos — segundo motivo de marca, usado como textura de
+     fundo (hero, banner final) em vez das listras diagonais, que
+     ficam reservadas pro corte de cartões/botões. */
+  .dot-grid {
+    background-image: radial-gradient(var(--brand-500) 1.6px, transparent 1.6px);
+    background-size: 22px 22px;
+  }
+
+  .dot-grid-soft {
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--brand-500) 60%, transparent) 1.6px,
+      transparent 1.6px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Pontos claros — para uso sobre fundos escuros/roxos, onde os pontos
+     na cor de marca perderiam contraste. */
+  .dot-grid-invert {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 1.6px, transparent 1.6px);
+    background-size: 22px 22px;
+  }
+
+  /* Corta o canto superior-direito e preenche o recorte com o padrão
+     diagonal — a "assinatura" visual dos cartões deste site. */
+  .notch-tr {
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+  }
+  .notch-tr::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 26px;
+    height: 26px;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+  }
+
+  /* Variante espelhada — canto inferior-esquerdo — usada alternadamente
+     pra quebrar a repetição de uma grade toda igual. */
+  .notch-bl {
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 26px 100%, 0 calc(100% - 26px));
+  }
+  .notch-bl::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 26px;
+    height: 26px;
+    clip-path: polygon(0 100%, 0 0, 100% 100%);
+    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+  }
+
+  /* Corta os dois cantos opostos ao mesmo tempo — usada isoladamente em
+     painéis de destaque (não combinável com .notch-tr/.notch-bl, que
+     competiriam pela mesma propriedade clip-path). */
+  .notch-both {
+    position: relative;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 26px) 0,
+      100% 26px,
+      100% calc(100% - 26px),
+      calc(100% - 26px) 100%,
+      26px 100%,
+      0 calc(100% - 26px),
+      0 26px
+    );
+  }
+  .notch-both::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 26px;
+    height: 26px;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+  }
+  .notch-both::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 26px;
+    height: 26px;
+    clip-path: polygon(0 100%, 0 0, 100% 100%);
+    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+  }
+
+  /* Botão com cantos cortados a 45° — no lugar do pill-button padrão. */
+  .btn-cut {
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+
+  /* Tira de divisor entre seções — substitui a borda reta padrão. */
+  .divider-stripes {
+    height: 8px;
+    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 2px, transparent 2px 10px);
+  }
+}
