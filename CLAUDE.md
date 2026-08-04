@@ -17,10 +17,16 @@ siblings deste diretório) — decisão tomada em 2026-07-21.
 - **Ritmo de iteração diferente**: landing page muda por campanha,
   teste A/B, novo conteúdo de marketing — não deveria estar acoplada ao
   ciclo de release do app.
-- **Estrutura de domínio**: este site vive na raiz do domínio
-  (`suaempresa.com`), o app autenticado num subdomínio
-  (`app.suaempresa.com`). Times de marketing/growth eventualmente mexem
-  só aqui, sem tocar no código do app.
+- **Estrutura de domínio**: pensado originalmente como raiz do domínio
+  (`suaempresa.com`) + app autenticado num subdomínio
+  (`app.suaempresa.com`), mas **ainda não existe domínio próprio
+  configurado** — nem este site nem o app autenticado. Cada um está
+  hospedado direto na URL padrão da Vercel: este site em
+  `https://puka-crm-landing.vercel.app`, o app autenticado em
+  `https://puka-crm-web.vercel.app` (ver `CLAUDE.md` do `crm-frontend`,
+  seção de deploy). Usar essa URL real do app como `NEXT_PUBLIC_APP_URL`
+  em produção até um domínio próprio existir; times de marketing/growth
+  eventualmente mexem só aqui, sem tocar no código do app.
 
 ## Stack
 
@@ -29,8 +35,9 @@ siblings deste diretório) — decisão tomada em 2026-07-21.
   eventualmente componentes de UI podem ser compartilhados).
 - **Tailwind CSS** — mesma escolha do `crm-frontend`, pra manter
   consistência visual entre marketing e app.
-- Deploy recomendado: Vercel (integração nativa com Next.js, CDN global,
-  preview deployments por PR).
+- Deploy: Vercel (integração nativa com Next.js, CDN global, preview
+  deployments por PR) — já deployado em
+  `https://puka-crm-landing.vercel.app`.
 
 ## O que este site faz (e o que não faz)
 
@@ -62,7 +69,10 @@ depois do cadastro.
 
 ## Fluxo de cadastro (mapeia direto pro backend já existente)
 
-`POST {API_URL}/companies` (sem autenticação, endpoint público) — payload:
+`POST {API_URL}/companies` (sem autenticação, endpoint público) — em
+produção, `API_URL` (env var `NEXT_PUBLIC_API_URL`, lida em `lib/api.ts`,
+com fallback pra `http://localhost:8000` só em dev) precisa apontar pra
+`https://pukacrm.duckdns.org`, o backend real já em produção. Payload:
 
 ```json
 {
@@ -80,8 +90,11 @@ depois do cadastro.
 
 Devolve `CompanyRead` (**sem token de acesso** — o cadastro não loga
 automaticamente). Depois de um cadastro bem-sucedido, o fluxo certo é
-**redirecionar pro login do app** (`https://app.suaempresa.com/login`,
-idealmente com o `owner_email` pré-preenchido), não tentar autenticar
+**redirecionar pro login do app** (`loginUrl()` em `lib/api.ts`, que
+monta a URL a partir de `APP_URL`/`NEXT_PUBLIC_APP_URL` — em produção
+precisa ser `https://puka-crm-web.vercel.app/login`, não
+`app.suaempresa.com`, que não existe ainda), idealmente com o
+`owner_email` pré-preenchido), não tentar autenticar
 direto — `POST /companies` e `POST /auth/login` são chamadas separadas.
 
 ⚠️ **Backend TODO antes de expor esse formulário publicamente de
@@ -152,7 +165,49 @@ churn nos primeiros meses.
 O domínio deste site precisa estar em `CORS_ORIGINS` no `.env` do
 `crm-backend` (já suporta múltiplas origens, separadas por vírgula — ver
 `CLAUDE.md` do backend, seção sobre CORS). Sem isso, o formulário de
-cadastro não consegue chamar a API do navegador.
+cadastro não consegue chamar a API do navegador. Este site já está
+deployado em `https://puka-crm-landing.vercel.app` — **essa URL precisa
+estar em `CORS_ORIGINS`** pro cadastro funcionar em produção. Usar o
+**domínio de produção** (o que aparece fixo em Project Settings, não a
+URL com hash tipo `<projeto>-<hash>-<team>.vercel.app` que cada
+deployment individual ganha) — foi exatamente esse detalhe que causou um erro de CORS ao
+validar o deploy do `crm-frontend` em 2026-07-29 (ver `CLAUDE.md` de lá).
+
+⚠️ **Confirmado quebrado em 2026-08-04, ainda não corrigido** — testado
+com `curl -X OPTIONS https://pukacrm.duckdns.org/companies -H "Origin:
+https://puka-crm-landing.vercel.app" ...`, resposta `400 Disallowed CORS
+origin`. `https://puka-crm-landing.vercel.app` **não está** em
+`CORS_ORIGINS` na VM de produção do backend — precisa ser adicionado lá
+(fora deste repositório, requer acesso à VM) antes do cadastro funcionar
+de verdade em produção. Até lá, o sintoma no navegador é erro de
+rede/CORS no console, não um erro de negócio normal — mesmo sintoma já
+descrito no `CLAUDE.md` do `crm-frontend`.
+
+## ✅ Corrigido em 2026-08-04 — `POST /companies` batendo em `localhost:8000` em produção
+
+Mesmo bug de classe já documentado no `CLAUDE.md` do `crm-frontend`
+(deploy de 2026-07-29): o projeto `puka-crm-landing` na Vercel **não
+tinha nenhuma Environment Variable configurada** (`vercel env ls`
+confirmou lista vazia) — build de produção caiu nos fallbacks de dev de
+`lib/api.ts`. Confirmado inspecionando o bundle JS servido de verdade em
+`https://puka-crm-landing.vercel.app/cadastro`: continha `localhost:8000`,
+nenhuma ocorrência de `pukacrm`.
+
+Corrigido via Vercel CLI (`vercel link` no projeto `my-team-1452bee4/
+puka-crm-landing`, depois `vercel env add ... production` pras três
+variáveis, depois `vercel deploy --prod --force` pra forçar rebuild sem
+cache — env var do Next.js é inlineada em build time, mudar sem
+redeploy não tem efeito):
+
+- `NEXT_PUBLIC_API_URL=https://pukacrm.duckdns.org`
+- `NEXT_PUBLIC_APP_URL=https://puka-crm-web.vercel.app`
+- `NEXT_PUBLIC_SITE_URL=https://puka-crm-landing.vercel.app`
+
+Confirmado no bundle novo: `pukacrm.duckdns.org` e `puka-crm-web.vercel.app`
+presentes, nenhuma ocorrência de `localhost`. **Isso resolve só a URL
+correta sendo chamada** — o cadastro continua não funcionando de ponta a
+ponta por causa do bloqueio de CORS descrito no aviso logo acima, que é
+um fix separado do lado do backend.
 
 ## Estrutura de páginas sugerida
 

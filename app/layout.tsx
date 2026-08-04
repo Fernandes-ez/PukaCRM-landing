@@ -14,7 +14,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://suaempresa.com";
+// Ainda sem domínio próprio — hospedado direto na URL padrão da Vercel.
+// Ajustar quando um domínio de produção for configurado.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://puka-crm-landing.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -1,3 +1,6 @@
+// Fallbacks são só pra dev local. Em produção: API_URL = crm-backend em
+// https://pukacrm.duckdns.org; APP_URL = crm-frontend em
+// https://puka-crm-web.vercel.app (nenhum dos dois tem domínio próprio ainda).
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 

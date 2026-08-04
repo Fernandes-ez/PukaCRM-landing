@@ -16,7 +16,7 @@ const features = [
   {
     title: "Distribuição entre a equipe",
     description:
-      "Conversas que precisam de humano chegam pra pessoa certa, na fila certa — sem grupo de WhatsApp bagunçado.",
+      "Conversas que precisam de humano chegam pra pessoa certa, na fila certa — respeitando o horário de trabalho e o limite de atendimentos simultâneos de cada atendente.",
     notch: "notch-bl" as const,
     icon: <path d="M17 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 20v-1a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />,
   },
@@ -26,6 +26,20 @@ const features = [
       "Nada se perde entre a IA e o time humano — cada mensagem, transferência e nota fica registrada no mesmo lugar.",
     notch: "notch-tr" as const,
     icon: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" />,
+  },
+  {
+    title: "Controle de acesso por cargo",
+    description:
+      "Cargos prontos pra usar — Dono, Administrador, Supervisor, Consultor(a) e Recepção — cada um vendo só o que precisa. Crie os seus se quiser algo diferente.",
+    notch: "notch-tr" as const,
+    icon: <path d="M4 4h16v16H4V4Z M12 8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z M7.5 17c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4" />,
+  },
+  {
+    title: "Conexão oficial com o WhatsApp",
+    description:
+      "Integração pela API oficial da Meta pro WhatsApp Business — sem QR Code nem gambiarra que arrisca banir o número da sua empresa.",
+    notch: "notch-bl" as const,
+    icon: <path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z M9 12l2 2 4-4" />,
   },
 ];
 
