@@ -13,7 +13,9 @@ export interface CreateCompanyPayload {
   email: string;
   phone: string;
   legal_name?: string;
-  document?: string;
+  // CPF ou CNPJ, com ou sem pontuação — obrigatório desde 2026-08-04,
+  // o Asaas exige documento do cliente pra criar a assinatura de verdade.
+  document: string;
   owner_full_name: string;
   owner_email: string;
   owner_password: string;

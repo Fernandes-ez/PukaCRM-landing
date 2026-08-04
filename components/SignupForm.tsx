@@ -52,6 +52,10 @@ function validate(form: FormState): Record<string, string> {
   if (form.phone.trim().length < 8 || form.phone.trim().length > 25) {
     errors.phone = "Informe um telefone válido (8 a 25 caracteres).";
   }
+  const documentDigits = form.document.replace(/\D/g, "");
+  if (documentDigits.length !== 11 && documentDigits.length !== 14) {
+    errors.document = "Informe um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.";
+  }
   if (form.owner_full_name.trim().length < 2 || form.owner_full_name.trim().length > 150) {
     errors.owner_full_name = "Informe seu nome completo (2 a 150 caracteres).";
   }
@@ -99,7 +103,7 @@ export default function SignupForm() {
         email: form.email.trim(),
         phone: form.phone.trim(),
         legal_name: form.legal_name.trim() || undefined,
-        document: form.document.trim() || undefined,
+        document: form.document.trim(),
         owner_full_name: form.owner_full_name.trim(),
         owner_email: form.owner_email.trim(),
         owner_password: form.owner_password,
@@ -205,12 +209,17 @@ export default function SignupForm() {
             />
           </Field>
 
-          <Field label="CNPJ" optional error={errors.document}>
+          <Field
+            label="CPF ou CNPJ"
+            error={errors.document}
+            hint="Sem CNPJ ainda? Pode usar seu CPF."
+          >
             <input
               type="text"
               value={form.document}
               onChange={(e) => updateField("document", e.target.value)}
               className={inputClass(!!errors.document)}
+              placeholder="000.000.000-00"
             />
           </Field>
         </div>

@@ -81,12 +81,22 @@ com fallback pra `http://localhost:8000` só em dev) precisa apontar pra
   "email": "email da empresa",
   "phone": "string (8-25)",
   "legal_name": "opcional",
-  "document": "opcional (CNPJ)",
+  "document": "CPF ou CNPJ, com ou sem pontuação (11-20 caracteres) — OBRIGATÓRIO desde 2026-08-04",
   "owner_full_name": "string (2-150)",
   "owner_email": "email de login do dono da conta",
   "owner_password": "mínimo 8 caracteres"
 }
 ```
+
+⚠️ **`document` virou obrigatório em 2026-08-04** (decisão #14/nota de
+2026-08-04 do `CLAUDE.MD` do backend) — o Asaas exige CPF ou CNPJ do
+cliente pra criar a assinatura de verdade (`POST /subscriptions` rejeita
+com 400 sem isso). Antes era opcional e só aceitava CNPJ; agora aceita
+**CPF ou CNPJ** (`CompanyCreate.document`, `min_length=11,
+max_length=20` no schema do backend) — importante pro texto do
+formulário não dizer só "CNPJ", já que parte do público-alvo (consultório
+de 1 profissional, autônomo) pode só ter CPF/MEI. Sem esse campo
+preenchido, `POST /companies` responde 422.
 
 Devolve `CompanyRead` (**sem token de acesso** — o cadastro não loga
 automaticamente). Depois de um cadastro bem-sucedido, o fluxo certo é
