@@ -70,7 +70,7 @@ export default function Features() {
             >
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-md border border-brand-200 dark:border-brand-800">
                 <span className="absolute inset-0 diagonal-lines-soft" />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--brand-600)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="relative h-5 w-5 dark:stroke-[var(--brand-400)]">
+                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--brand-600)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="relative h-5 w-5 dark:stroke-[var(--brand-400)]">
                   {feature.icon}
                 </svg>
               </span>

@@ -95,6 +95,24 @@ body {
   color: var(--brand-950);
 }
 
+/* Foco de teclado visível em todo elemento focável — 2px de contorno
+   com cor de bom contraste (--ring), não o outline finíssimo padrão
+   do navegador. .btn-cut tem sua própria regra logo abaixo: clip-path
+   corta qualquer parte do outline/box-shadow que caia fora da forma
+   cortada, então o outline normal fica quase invisível nesses botões. */
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
 /* ============================================================
    "Sinal diagonal" — motivo de marca recorrente (barras a 135°),
    usado no logo, cortes de cartão, divisores e botões, no lugar
@@ -241,4 +259,17 @@ body {
     height: 8px;
     background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 2px, transparent 2px 10px);
   }
+}
+
+/* Fora de @layer de propósito: alguns botões .btn-cut também levam
+   utilitários de box-shadow do Tailwind (ex.: shadow-sm), que vivem em
+   @layer utilities — uma camada mais alta que @layer components sempre
+   vence, não importa a especificidade do :focus-visible. Deixando essa
+   regra sem camada, ela vence qualquer coisa em qualquer camada (mesma
+   lição do bug do .notch-both/.absolute). */
+.btn-cut:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 2px var(--background),
+    inset 0 0 0 4px var(--ring);
 }

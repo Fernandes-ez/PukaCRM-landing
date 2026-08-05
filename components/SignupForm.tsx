@@ -126,7 +126,7 @@ export default function SignupForm() {
     return (
       <div className="notch-both border border-brand-200 bg-card p-8 text-center dark:border-brand-800">
         <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </span>

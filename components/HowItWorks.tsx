@@ -44,7 +44,8 @@ export default function HowItWorks() {
           className="pointer-events-none absolute inset-x-0 top-10 hidden w-full sm:block"
           height="2"
           preserveAspectRatio="none"
-          aria-hidden
+          aria-hidden="true"
+          focusable="false"
         >
           <line
             x1="16%"

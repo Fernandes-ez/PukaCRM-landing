@@ -92,9 +92,14 @@ export default function Pricing() {
             Comece grátis em qualquer plano — sem cartão de crédito.
           </p>
 
-          <div className="mt-8 inline-flex items-center gap-1 rounded-full border border-border p-1">
+          <div
+            role="group"
+            aria-label="Cobrança mensal ou anual"
+            className="mt-8 inline-flex items-center gap-1 rounded-full border border-border p-1"
+          >
             <button
               type="button"
+              aria-pressed={!annual}
               onClick={() => setAnnual(false)}
               className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
                 !annual ? "bg-brand-600 text-white" : "text-muted-foreground"
@@ -104,6 +109,7 @@ export default function Pricing() {
             </button>
             <button
               type="button"
+              aria-pressed={annual}
               onClick={() => setAnnual(true)}
               className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
                 annual ? "bg-brand-600 text-white" : "text-muted-foreground"
@@ -169,6 +175,8 @@ export default function Pricing() {
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex gap-2.5">
                       <svg
+                        aria-hidden="true"
+                        focusable="false"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"

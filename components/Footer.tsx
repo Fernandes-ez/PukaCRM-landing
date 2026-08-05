@@ -18,24 +18,24 @@ export default function Footer() {
           <div className="flex gap-16">
             <div>
               <h3 className="text-sm font-semibold">Produto</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <ul className="mt-3 -mx-1 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/#funcionalidades" className="hover:text-foreground">
+                  <Link href="/#funcionalidades" className="inline-block rounded-sm px-1 py-1.5 hover:text-foreground">
                     Funcionalidades
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#casos-de-uso" className="hover:text-foreground">
+                  <Link href="/#casos-de-uso" className="inline-block rounded-sm px-1 py-1.5 hover:text-foreground">
                     Casos de uso
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#precos" className="hover:text-foreground">
+                  <Link href="/#precos" className="inline-block rounded-sm px-1 py-1.5 hover:text-foreground">
                     Preços
                   </Link>
                 </li>
                 <li>
-                  <Link href="/cadastro" className="hover:text-foreground">
+                  <Link href="/cadastro" className="inline-block rounded-sm px-1 py-1.5 hover:text-foreground">
                     Comece grátis
                   </Link>
                 </li>
@@ -44,14 +44,14 @@ export default function Footer() {
 
             <div>
               <h3 className="text-sm font-semibold">Legal</h3>
-              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <ul className="mt-3 -mx-1 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/termos" className="hover:text-foreground">
+                  <Link href="/termos" className="inline-block rounded-sm px-1 py-1.5 hover:text-foreground">
                     Termos de Uso
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacidade" className="hover:text-foreground">
+                  <Link href="/privacidade" className="inline-block rounded-sm px-1 py-1.5 hover:text-foreground">
                     Política de Privacidade
                   </Link>
                 </li>
