@@ -116,59 +116,85 @@ backend. Documentado aqui pra não esquecer, não é trabalho deste repo.
 
 ## Planos e preços
 
-Definido em 2026-07-21 (análise de mercado + custo de operação — os 3
-concorrentes diretos mais próximos são Umbler Talk, Digisac, Whaticket e
-BotConversa; este último é o mais parecido por já incluir IA). **Rascunho
-pra validar com clientes piloto antes de considerar definitivo, mas já
-serve de conteúdo real pra construir a página.** IA de atendimento entra
-nos três planos — é o motivo de compra, não um upsell. Onboarding
-assistido também entra nos três por enquanto (todo cliente nessa fase
-precisa de ajuda configurando o Assistente e conectando o WhatsApp).
+**Revisado em 2026-08-14** — substitui o rascunho de 2026-07-21 (preços
+antigos R$127/R$297/"a partir de R$697"). Motivo da revisão: estudo de
+mercado mais completo, lendo o código real de `crm-backend`/
+`crm-frontend` (não só a doc de produto) e pesquisando 9 concorrentes
+diretos/adjacentes (Kommo, ChatGuru, Digisac, Umbler Talk, Zenvia, Wati,
+Huggy, JivoChat, além de software vertical que o próprio público-alvo
+já assina — EVO/Pacto pra academia, softwares de clínica). Achado
+central: o custo variável de IA (Gemini) é praticamente zero — o preço
+é ancorado em valor de mercado, não em custo de operação. **Ainda é
+rascunho pra validar com clientes piloto**, mas reflete melhor o
+posicionamento real do produto do que a versão anterior. IA de
+atendimento entra nos três planos — é o motivo de compra, não um
+upsell. Onboarding assistido também entra nos três por enquanto.
 
 **⚠️ Evitar jargão técnico no texto da página** (ex: não escrever "RBAC")
 — usar linguagem que a pessoa que está comprando reconhece: "controle de
 acesso por cargo", "quem da equipe pode ver/fazer o quê".
 
-### Starter — R$ 127/mês (R$ 97/mês no plano anual)
-- 1 número de WhatsApp
+**Puka Copilot (o assistente de IA que sugere argumento de venda pro
+consultor humano, ver `CLAUDE.md` do backend, decisão #28) só aparece
+no Professional e no Enterprise** — ele só existe quando uma conversa já
+está com um humano, então o valor dele só é óbvio no perfil de cliente
+desses dois planos; incluir no Starter diluiria o motivo de upgrade.
+Nenhum concorrente pesquisado oferece isso no mesmo preço — a Wati, por
+exemplo, cobra "créditos de IA Co-pilot" à parte mesmo no plano de
+US$299/mês.
+
+### Starter — R$ 197/mês (R$ 158/mês no plano anual)
+- 1 número de WhatsApp (API oficial da Meta)
 - Até 3 funcionários
 - IA de atendimento (Assistente configurável)
-- CRM de Leads e histórico de conversas
+- CRM completo: pipeline, tarefas e observações
+- Distribuição automática de leads
 - Controle de acesso por cargo
-- Onboarding assistido
+- **Sem Puka Copilot**
 
 Pra quem: começando a organizar o atendimento — consultório de 1-2
 profissionais, academia pequena.
 
-### Professional — R$ 297/mês (R$ 247/mês no plano anual) — plano em destaque
+### Professional — R$ 397/mês (R$ 318/mês no plano anual) — plano em destaque
 - Tudo do Starter
 - Até 10 funcionários
-- Distribuição automática de leads e conversas
-- Pipeline de vendas e tarefas (CRM completo)
-- Relatórios de atendimento
+- **Puka Copilot** — sugestão de venda em tempo real pro consultor
+- Campanhas segmentadas, com agendamento e recorrência
+- Templates com botões (resposta rápida, link, telefone)
+- Suporte prioritário
 
-Pra quem: equipe de atendimento de verdade, múltiplos atendentes
-revezando — é onde a maioria dos clientes-alvo deve cair. Destacar
-visualmente esse plano na página (é o "recomendado").
+Pra quem: equipe de vendas de verdade, vários consultores revezando
+conversa no WhatsApp — é onde a maioria dos clientes-alvo deve cair.
+Destacar visualmente esse plano na página (é o "recomendado").
 
-### Enterprise — a partir de R$ 697/mês (sob consulta)
+### Enterprise — a partir de R$ 897/mês (sob consulta)
 - Tudo do Professional
 - Funcionários ilimitados
-- Relatórios avançados e exportação de dados
-- Suporte prioritário (SLA)
-- Ajuda especializada na configuração do Assistente
+- Puka Copilot incluído
+- Fila de campanha prioritária, maior volume de disparo
+- Onboarding assistido + gerente de conta dedicado
+- Suporte com SLA
 
-Pra quem: operação de atendimento grande, equipe que já passou dos 10
-funcionários. CTA deveria ser "fale com a gente", não um cadastro
-self-service direto.
+Pra quem: redes, franquias e operações de atendimento em volume. CTA
+deveria ser "fale com a gente", não um cadastro self-service direto.
+**Desenho comercial pendente pra redes com múltiplas unidades**: hoje a
+arquitetura é 1 número de WhatsApp por `Company` — uma rede vira N
+contas, então o desconto por unidade precisa refletir isso, não fingir
+que é uma assinatura única maior.
 
 **Não oferecer**: plano com múltiplos números de WhatsApp — o produto
 hoje só suporta 1 número por empresa (decisão de escopo já tomada no
 backend). Se isso mudar no futuro, vira diferencial real do Enterprise.
 
-**Cobrança anual**: ~20% de desconto em todos os planos (padrão do
-mercado, é o que a Umbler Talk pratica) — ajuda fluxo de caixa e reduz
-churn nos primeiros meses.
+**Cobrança anual**: ~20% de desconto em todos os planos — ajuda fluxo de
+caixa e reduz churn nos primeiros meses.
+
+**Custos da Meta são à parte, com transparência**: mensagens de campanha
+(categoria Marketing) são cobradas direto pela Meta, repassadas sem
+markup escondido na mensalidade; conversas normais de atendimento (lead
+manda mensagem primeiro) têm cota mensal gratuita. Mesmo modelo que
+Zenvia e Wati já praticam — evita a percepção de "aumento de preço
+escondido" quando uma campanha grande gera custo.
 
 ## CORS — configuração necessária no backend
 
@@ -219,28 +245,62 @@ correta sendo chamada** — o cadastro continua não funcionando de ponta a
 ponta por causa do bloqueio de CORS descrito no aviso logo acima, que é
 um fix separado do lado do backend.
 
-## Estrutura de páginas sugerida
+## Estrutura de páginas (já construída, não é mais só sugestão)
 
-Baseado na doc de produto original (`crm-backend/Documentao_plataforma_crm.pdf`,
-seções 1-2 — visão geral, público-alvo):
+A nota anterior aqui descrevia uma estrutura "sugerida" como planejamento
+— **desatualizada**: a home já está construída de ponta a ponta
+(`app/page.tsx` + `components/`), com um sistema de marca próprio
+(`app/globals.css`): escala de roxo derivada de `--brand-600`
+(`#B105DB`), um ciano análogo (`--accent-*`) usado só em destaques (ex:
+o Puka Copilot), e três motivos visuais recorrentes no lugar de
+gradiente/blob genérico — listras diagonais a 135° (`.diagonal-lines*`),
+grade de pontos (`.dot-grid*`, as "bolinhas" de marca) e cantos cortados
+(`.notch-tr`/`.notch-bl`/`.notch-both`, com `.btn-cut` no mesmo espírito
+pros botões). Fonte é Geist (padrão do Next.js/Vercel), não uma escolha
+genérica de IA.
 
-- **Home** — proposta de valor (IA atende primeiro, time assume quando
-  precisa, tudo organizado num CRM só), como funciona, CTA de cadastro.
-- **Funcionalidades** — atendimento automatizado por IA configurável,
-  CRM/gestão de leads, distribuição entre a equipe, histórico completo
-  de conversa.
-- **Casos de uso / público-alvo** — academias, clínicas, escolas,
-  consultorias, imobiliárias, comércio em geral (doc seção 1).
-- **Preços** — os 3 planos já estão definidos, ver seção "Planos e
-  preços" acima pro conteúdo completo. CTA de Starter/Professional é
-  "comece grátis" (cadastro direto, trial); CTA do Enterprise é "fale
-  com a gente" (sem self-service). Sem checkout de verdade nesta fase —
-  ver ressalvas na seção "O que este site faz".
-- **Cadastro** (`/cadastro` ou modal na home) — formulário mapeado no
-  fluxo acima.
-- Rodapé: Termos de Uso e Política de Privacidade — **conteúdo ainda não
-  existe**, precisa ser escrito (jurídico) antes do lançamento público;
-  por ora pode ser placeholder.
+- **Home** (`components/Hero.tsx`) — proposta de valor (IA atende
+  primeiro, time assume quando precisa), mockup de conversa de WhatsApp
+  no motivo `.notch-both`, CTA de cadastro.
+- **Como funciona** (`HowItWorks.tsx`) — 3 passos, do primeiro contato ao
+  CRM organizado.
+- **Funcionalidades** (`Features.tsx`) — grid de 6 cards (IA
+  configurável, CRM, distribuição, histórico, controle de acesso por
+  cargo, API oficial da Meta).
+- **Puka Copilot** (`CopilotSpotlight.tsx`, **novo em 2026-08-14**) —
+  seção assimétrica dedicada (texto + mockup de sugestão em tempo real),
+  não mais um item genérico dentro do grid de Features — o copiloto é o
+  maior diferencial competitivo achado na pesquisa de mercado (ver seção
+  "Planos e preços"), merecia destaque próprio. Usa a cor `--accent-*`
+  (não o roxo de marca) pra sinalizar visualmente "isso é uma camada de
+  IA à parte", consistente com o badge do Copilot na seção de Preços.
+- **Casos de uso** (`UseCases.tsx`) — grid de 6 segmentos (academias,
+  clínicas, escolas, consultorias, imobiliárias, comércio em geral).
+- **Preços** (`Pricing.tsx`) — os 3 planos, ver seção "Planos e preços"
+  acima pro conteúdo completo. CTA de Starter/Professional é "comece
+  grátis" (cadastro direto, trial); CTA do Enterprise é "fale com a
+  gente" (`mailto:contato@pukacrm.com.br` — endereço ainda não existe de
+  verdade, precisa virar um e-mail real antes do lançamento). Sem
+  checkout de verdade nesta fase — ver ressalvas na seção "O que este
+  site faz".
+- **FAQ** (`Faq.tsx`, **novo em 2026-08-14**) — `<details>/<summary>`
+  nativos (acessível por padrão, sem JS de estado), respondendo objeção
+  real de quem está decidindo: não é WhatsApp Web/QR Code (é API oficial
+  da Meta), a IA não substitui a equipe, custo de mensageria da Meta é à
+  parte, não precisa de CNPJ nem cartão pra testar, e em quais planos o
+  Copilot está.
+- **Cadastro** (`/cadastro`) — formulário mapeado no fluxo acima.
+- Rodapé: Termos de Uso e Política de Privacidade — **conteúdo ainda
+  placeholder**, precisa ser escrito (jurídico) antes do lançamento
+  público.
+
+**Ajuste de 2026-08-14**: `FinalCta.tsx` usava
+`bg-gradient-to-br from-brand-600 to-brand-800` — removido em favor de
+`bg-brand-800` sólido (+ os motivos de marca já existentes, `.dot-grid-invert`
+e uma tira `.diagonal-lines-accent`). Gradiente decorativo genérico é um
+dos "tells" mais reconhecíveis de site feito por IA sem direção de
+design; o resto do site já evitava isso, esse era o único lugar que
+ainda usava.
 
 ## Comandos úteis
 
