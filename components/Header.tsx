@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/#funcionalidades", label: "Funcionalidades" },
   { href: "/#casos-de-uso", label: "Casos de uso" },
   { href: "/#precos", label: "Preços" },
+  { href: "/#perguntas", label: "Perguntas" },
 ];
 
 export default function Header() {

@@ -1,0 +1,75 @@
+const faqs = [
+  {
+    question: "Isso é WhatsApp Web com QR Code?",
+    answer:
+      "Não. A conexão é pela API oficial da Meta (WhatsApp Business Cloud API) — nada de QR Code ou automação não-oficial que arrisca banir o número da sua empresa.",
+  },
+  {
+    question: "A IA substitui minha equipe de atendimento?",
+    answer:
+      "Não. A IA faz o primeiro contato e resolve o que for repetitivo; quando a conversa precisa de alguém, ela é transferida pra um humano automaticamente, com todo o histórico junto.",
+  },
+  {
+    question: "Preciso pagar a Meta separado da mensalidade?",
+    answer:
+      "Mensagens de campanha (categoria Marketing) são cobradas pela própria Meta, direto na tabela dela — repassamos isso à parte, sem markup escondido no plano. Conversas normais de atendimento, quando o cliente manda mensagem primeiro, têm uma cota mensal gratuita.",
+  },
+  {
+    question: "Preciso de CNPJ pra começar?",
+    answer:
+      "Não necessariamente — dá pra cadastrar com CPF pra testar. Recomendamos ter CNPJ antes de contratar o WhatsApp oficial pra valer, mas isso não trava o cadastro nem o período de teste.",
+  },
+  {
+    question: "O Puka Copilot está em todos os planos?",
+    answer:
+      "Só no Professional e no Enterprise. Ele entra em cena quando um consultor já assumiu a conversa — no Starter, sem essa etapa ainda, o foco é o essencial de IA de atendimento e CRM.",
+  },
+  {
+    question: "Preciso de cartão de crédito pra testar?",
+    answer:
+      "Não. Você cria a conta e tem 14 dias de teste grátis em qualquer plano, sem pedir cartão.",
+  },
+];
+
+export default function Faq() {
+  return (
+    <section id="perguntas" className="mx-auto max-w-3xl px-6 py-24">
+      <div className="text-center">
+        <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
+          <span className="h-3 w-3 diagonal-lines" />
+          Perguntas frequentes
+        </span>
+        <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+          Antes de começar
+        </h2>
+      </div>
+
+      <div className="mt-12 divide-y divide-border border-y border-border">
+        {faqs.map((faq) => (
+          <details key={faq.question} className="group py-5 first:pt-0 last:pb-0">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold marker:content-none">
+              {faq.question}
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}

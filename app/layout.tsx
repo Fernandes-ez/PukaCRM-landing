@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     template: "%s · Puka CRM",
   },
   description:
-    "Atendimento automático no WhatsApp com IA e CRM completo pra academias, clínicas, escolas e times de vendas. Sua equipe assume a conversa só quando precisa.",
+    "Atendimento automático no WhatsApp com IA, CRM completo e um copiloto de vendas por IA pro seu time — pra academias, clínicas, escolas e times de vendas. Sua equipe assume a conversa só quando precisa.",
   openGraph: {
     title: "Puka CRM — Atendimento no WhatsApp com IA",
     description:
-      "Atendimento automático no WhatsApp com IA e CRM completo pra pequenas e médias empresas. Comece grátis.",
+      "Atendimento automático no WhatsApp com IA, CRM completo e um copiloto de vendas por IA pro seu time. Comece grátis.",
     url: siteUrl,
     siteName: "Puka CRM",
     locale: "pt_BR",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Puka CRM — Atendimento no WhatsApp com IA",
     description:
-      "Atendimento automático no WhatsApp com IA e CRM completo pra pequenas e médias empresas.",
+      "Atendimento automático no WhatsApp com IA, CRM completo e um copiloto de vendas por IA pro seu time.",
   },
 };
 

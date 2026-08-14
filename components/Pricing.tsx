@@ -10,6 +10,7 @@ interface Plan {
   annualPrice: number | null;
   priceNote?: string;
   description: string;
+  copilot: boolean;
   features: string[];
   cta: { label: string; href: string };
   notch: "notch-tr" | "notch-bl" | "notch-both";
@@ -20,17 +21,18 @@ const plans: Plan[] = [
   {
     slug: "starter",
     name: "Starter",
-    monthlyPrice: 127,
-    annualPrice: 97,
+    monthlyPrice: 197,
+    annualPrice: 158,
     description:
-      "Pra começar a organizar o atendimento — consultório de 1-2 profissionais, academia pequena.",
+      "Pra montar a primeira operação de atendimento de verdade — consultório de 1-2 profissionais, academia pequena.",
+    copilot: false,
     features: [
-      "1 número de WhatsApp",
+      "1 número de WhatsApp (API oficial da Meta)",
       "Até 3 funcionários",
       "IA de atendimento (Assistente configurável)",
-      "CRM de leads e histórico de conversas",
+      "CRM completo: pipeline, tarefas e observações",
+      "Distribuição automática de leads",
       "Controle de acesso por cargo",
-      "Onboarding assistido",
     ],
     cta: { label: "Comece grátis", href: "/cadastro?plano=starter" },
     notch: "notch-tr",
@@ -38,16 +40,18 @@ const plans: Plan[] = [
   {
     slug: "professional",
     name: "Professional",
-    monthlyPrice: 297,
-    annualPrice: 247,
+    monthlyPrice: 397,
+    annualPrice: 318,
     description:
-      "Pra equipe de atendimento de verdade, com múltiplos atendentes revezando.",
+      "Pra equipe de vendas de verdade, com vários consultores revezando conversa no WhatsApp.",
+    copilot: true,
     features: [
       "Tudo do Starter",
       "Até 10 funcionários",
-      "Distribuição automática de leads e conversas",
-      "Pipeline de vendas e tarefas (CRM completo)",
-      "Relatórios de atendimento",
+      "Puka Copilot — sugestão de venda em tempo real",
+      "Campanhas segmentadas, com agendamento e recorrência",
+      "Templates com botões (resposta rápida, link, telefone)",
+      "Suporte prioritário",
     ],
     cta: { label: "Comece grátis", href: "/cadastro?plano=professional" },
     notch: "notch-both",
@@ -58,17 +62,19 @@ const plans: Plan[] = [
     name: "Enterprise",
     monthlyPrice: null,
     annualPrice: null,
-    priceNote: "A partir de R$ 697/mês",
+    priceNote: "A partir de R$ 897/mês",
     description:
-      "Pra operação de atendimento grande, equipe que já passou dos 10 funcionários.",
+      "Pra redes, franquias e operações de atendimento em volume.",
+    copilot: true,
     features: [
       "Tudo do Professional",
       "Funcionários ilimitados",
-      "Relatórios avançados e exportação de dados",
-      "Suporte prioritário (SLA)",
-      "Ajuda especializada na configuração do Assistente",
+      "Puka Copilot incluído",
+      "Fila de campanha prioritária, maior volume de disparo",
+      "Onboarding assistido + gerente de conta dedicado",
+      "Suporte com SLA",
     ],
-    cta: { label: "Fale com a gente", href: "mailto:contato@suaempresa.com" },
+    cta: { label: "Fale com a gente", href: "mailto:contato@pukacrm.com.br" },
     notch: "notch-bl",
   },
 ];
@@ -172,25 +178,49 @@ export default function Pricing() {
                 </div>
 
                 <ul className="mt-6 flex-1 space-y-3 text-sm">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex gap-2.5">
+                  {plan.features.map((feature) => {
+                    const isCopilotLine = feature.startsWith("Puka Copilot");
+                    return (
+                      <li key={feature} className="flex gap-2.5">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke={isCopilotLine ? "var(--accent-500)" : "var(--brand-500)"}
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="mt-0.5 h-4 w-4 shrink-0"
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                        <span className={isCopilotLine ? "font-semibold text-foreground" : "text-muted-foreground"}>
+                          {feature}
+                        </span>
+                      </li>
+                    );
+                  })}
+                  {!plan.copilot && (
+                    <li className="flex gap-2.5 opacity-60">
                       <svg
                         aria-hidden="true"
                         focusable="false"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="var(--brand-500)"
+                        stroke="currentColor"
                         strokeWidth="2.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="mt-0.5 h-4 w-4 shrink-0"
+                        className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
                       >
-                        <path d="M20 6 9 17l-5-5" />
+                        <path d="M6 6l12 12M18 6 6 18" />
                       </svg>
-                      <span className="text-muted-foreground">{feature}</span>
+                      <span className="text-muted-foreground">Sem Puka Copilot</span>
                     </li>
-                  ))}
+                  )}
                 </ul>
 
                 {plan.cta.href.startsWith("mailto:") ? (
@@ -207,9 +237,10 @@ export default function Pricing() {
           })}
         </div>
 
-        <p className="mt-10 text-center text-xs text-muted-foreground">
-          Planos em validação com os primeiros clientes e sujeitos a ajuste —
-          ainda sem limites aplicados automaticamente por plano.
+        <p className="mx-auto mt-10 max-w-lg text-center text-xs text-muted-foreground">
+          Mensagens de campanha (Marketing) são cobradas à parte, direto pela
+          Meta — conversas normais de atendimento têm cota mensal gratuita.
+          Planos em validação com os primeiros clientes e sujeitos a ajuste.
         </p>
       </div>
     </section>
