@@ -189,12 +189,21 @@ backend). Se isso mudar no futuro, vira diferencial real do Enterprise.
 **Cobrança anual**: ~20% de desconto em todos os planos — ajuda fluxo de
 caixa e reduz churn nos primeiros meses.
 
-**Custos da Meta são à parte, com transparência**: mensagens de campanha
-(categoria Marketing) são cobradas direto pela Meta, repassadas sem
-markup escondido na mensalidade; conversas normais de atendimento (lead
-manda mensagem primeiro) têm cota mensal gratuita. Mesmo modelo que
-Zenvia e Wati já praticam — evita a percepção de "aumento de preço
-escondido" quando uma campanha grande gera custo.
+**Correção em 2026-08-14, achada verificando as próprias afirmações da
+landing contra o código**: a versão original desta nota (e do texto da
+FAQ/rodapé de Preços na página) dizia que a Puka "repassa" o custo de
+mensageria da Meta "sem markup" — **isso não existe no backend**, grep
+por `markup`/custo de WhatsApp em `app/` não achou nada. Não existe
+mecanismo de billing/repasse de custo de mensageria pro cliente hoje.
+Textualmente correto só o que é política pública da própria Meta:
+conversas normais de atendimento (lead manda mensagem primeiro) têm
+cota mensal gratuita; mensagens de campanha (categoria Marketing) têm
+tabela paga da Meta. Zenvia/Wati praticam repasse transparente disso
+— é um modelo saudável **de referência pro futuro**, não algo que a
+Puka já implementou. Nesta fase inicial (modo manual, número
+conectado pela própria equipe da Puka dentro do Business Portfolio
+dela), quem paga a Meta pelo tráfego dos pilotos é a própria Puka —
+ainda não existe um mecanismo de repasse de custo por cliente.
 
 ## CORS — configuração necessária no backend
 

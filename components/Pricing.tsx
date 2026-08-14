@@ -70,7 +70,7 @@ const plans: Plan[] = [
       "Tudo do Professional",
       "Funcionários ilimitados",
       "Puka Copilot incluído",
-      "Fila de campanha prioritária, maior volume de disparo",
+      "Condições sob medida pro seu volume de campanha",
       "Onboarding assistido + gerente de conta dedicado",
       "Suporte com SLA",
     ],
@@ -238,9 +238,12 @@ export default function Pricing() {
         </div>
 
         <p className="mx-auto mt-10 max-w-lg text-center text-xs text-muted-foreground">
-          Mensagens de campanha (Marketing) são cobradas à parte, direto pela
-          Meta — conversas normais de atendimento têm cota mensal gratuita.
-          Planos em validação com os primeiros clientes e sujeitos a ajuste.
+          Mensagens do dia a dia com quem te procura no WhatsApp são
+          gratuitas. Só campanhas de Marketing têm um custo por envio,
+          cobrado à parte pela própria Meta. Planos ainda em validação com
+          os primeiros clientes: os limites de cada um (nº de funcionários,
+          Copilot) hoje dependem de combinado direto com a gente, não de um
+          bloqueio automático no sistema.
         </p>
       </div>
     </section>

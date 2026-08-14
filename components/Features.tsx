@@ -9,7 +9,7 @@ const features = [
   {
     title: "CRM de leads integrado",
     description:
-      "Cada conversa vira um lead com etapa, valor e histórico — sem precisar exportar nada pra outra ferramenta.",
+      "Cada conversa vira um lead com etapa no funil e histórico completo — sem precisar exportar nada pra outra ferramenta.",
     notch: "notch-bl" as const,
     icon: <path d="M3 4h18M3 4v16h18V4M3 4l9 8 9-8M8 14h.01M8 17h4" />,
   },
@@ -30,7 +30,7 @@ const features = [
   {
     title: "Controle de acesso por cargo",
     description:
-      "Cargos prontos pra usar — Dono, Administrador, Supervisor, Consultor(a) e Recepção — cada um vendo só o que precisa. Crie os seus se quiser algo diferente.",
+      "Cargos prontos pra usar — Dono, Administrador, Supervisor, Consultora e Recepção — cada um vendo só o que precisa. Crie os seus se quiser algo diferente.",
     notch: "notch-tr" as const,
     icon: <path d="M4 4h16v16H4V4Z M12 8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z M7.5 17c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4" />,
   },

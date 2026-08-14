@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "Preciso pagar a Meta separado da mensalidade?",
     answer:
-      "Mensagens de campanha (categoria Marketing) são cobradas pela própria Meta, direto na tabela dela — repassamos isso à parte, sem markup escondido no plano. Conversas normais de atendimento, quando o cliente manda mensagem primeiro, têm uma cota mensal gratuita.",
+      "No dia a dia, não: mensagens com quem te procura primeiro no WhatsApp são gratuitas, dentro de uma cota mensal que a própria Meta libera. Só mensagens de campanha (Marketing) têm custo por envio cobrado direto pela Meta — nesta fase inicial, isso é combinado caso a caso com o nosso time, não é um valor que cai sozinho na sua fatura.",
   },
   {
     question: "Preciso de CNPJ pra começar?",

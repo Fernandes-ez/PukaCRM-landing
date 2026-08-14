@@ -3,7 +3,7 @@ const steps = [
     number: "01",
     title: "A IA responde na hora",
     description:
-      "Configure o que a IA sabe sobre seu negócio e ela já atende quem chegar no WhatsApp — horário de funcionamento, dúvidas frequentes, agendamento, o que você precisar.",
+      "Configure o que a IA sabe sobre seu negócio e ela já atende quem chegar no WhatsApp — horário de funcionamento, dúvidas frequentes, condições de plano, o que você precisar.",
     notch: "notch-tr" as const,
   },
   {

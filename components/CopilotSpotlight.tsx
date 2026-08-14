@@ -71,7 +71,7 @@ export default function CopilotSpotlight() {
             {[
               "Só entra em cena com objeção real — não em todo “oi” ou “obrigado”.",
               "Sugere o argumento, não escreve a mensagem — quem decide o que mandar continua sendo o consultor.",
-              "Chega direto no painel, em tempo real — sem pedir, sem recarregar a tela.",
+              "Chega direto no painel, em tempo real — sem precisar pedir nada.",
             ].map((line) => (
               <li key={line} className="flex gap-3 text-sm leading-6">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500" />

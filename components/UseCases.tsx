@@ -1,6 +1,6 @@
 const segments = [
   { name: "Academias", detail: "Matrícula, renovação e dúvidas sobre planos direto no WhatsApp.", notch: "notch-tr" as const },
-  { name: "Clínicas", detail: "Agendamento, confirmação de consulta e triagem inicial automatizados.", notch: "notch-bl" as const },
+  { name: "Clínicas", detail: "Triagem inicial e dúvidas de paciente respondidas na hora, com o time avisado quando precisa entrar.", notch: "notch-bl" as const },
   { name: "Escolas", detail: "Atendimento de matrícula e dúvidas de responsáveis, sem depender da secretaria o tempo todo.", notch: "notch-tr" as const },
   { name: "Consultorias", detail: "Qualificação de lead antes de cair na agenda de quem vende.", notch: "notch-bl" as const },
   { name: "Imobiliárias", detail: "Primeiro contato sobre imóveis e visitas, com o lead já organizado no funil.", notch: "notch-tr" as const },
