@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Preciso de CNPJ pra começar?",
     answer:
-      "Não necessariamente — dá pra cadastrar com CPF pra testar. Recomendamos ter CNPJ antes de contratar o WhatsApp oficial pra valer, mas isso não trava o cadastro nem o período de teste.",
+      "Não. No cadastro pedimos CPF ou CNPJ — é exigência da nossa assinatura recorrente, não do WhatsApp — e CPF já resolve. Nesta fase inicial, quem conecta seu número de WhatsApp é a nossa própria equipe, dentro da nossa conta autorizada na Meta, então isso nem depende do seu documento.",
   },
   {
     question: "O Puka Copilot está em todos os planos?",
