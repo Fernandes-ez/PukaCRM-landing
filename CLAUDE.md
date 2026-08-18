@@ -205,6 +205,60 @@ conectado pela própria equipe da Puka dentro do Business Portfolio
 dela), quem paga a Meta pelo tráfego dos pilotos é a própria Puka —
 ainda não existe um mecanismo de repasse de custo por cliente.
 
+## ✅ Reprecificação em 2026-08-19 — 2 planos, ciclos trimestral/semestral/anual
+
+**Substitui a seção acima** (a estrutura de 3 planos de 2026-08-14 não
+vale mais). Pedido do usuário: reduzir de 3 pra 2 planos, adicionar
+cobrança trimestral/semestral/anual (além do mensal), e restringir a
+Agenda de agendamentos ao plano mais caro. Pesquisa de mercado feita
+antes de decidir os números (6 concorrentes: Huggy, JivoChat, Wati,
+Kommo, Digisac, Umbler Talk) - achado: **nenhum concorrente pesquisado
+tem trimestral/semestral explícito**, o padrão do mercado é binário
+(mensal vs. anual) - escalonar em 3 níveis é diferencial de vendas, não
+alinhamento de mercado. Ver decisão #54 do `CLAUDE.MD` do backend pro
+desenho técnico completo (enforcement real da Agenda por plano, cálculo
+de rateio generalizado pra qualquer ciclo, migration de dados).
+
+- **Essencial** (era Starter) — R$197/mês, preço mensal **mantido**
+  (Digisac cobra exatamente R$197 de entrada, Umbler R$69-198 - segue
+  bem posicionado). Mesmas features de antes.
+- **Completo** (funde Professional + Enterprise) — R$397/mês, preço
+  mensal do antigo Professional **mantido** (Huggy, bem mais caro no
+  topo, confirma que ainda está barato pro segmento). Ganha os
+  diferenciais que eram só do Enterprise (funcionários ilimitados, fila
+  de campanha prioritária, onboarding assistido, SLA) **sem aumentar o
+  preço** - não custa nada tecnicamente hoje, não existe trava de
+  quantidade de funcionário no sistema. **Agenda de agendamentos vira
+  exclusiva daqui** - novidade desta reprecificação, com **trava real
+  no backend** (não é só posicionamento de marketing como o resto).
+- **Enterprise deixa de ser coluna formal** - vira só uma nota fora da
+  tabela ("Rede, franquia ou operação em volume maior? Fale com a
+  gente") pra negociação de verdade, não uma 3ª opção de preço fixo.
+- **Ciclos de cobrança**: mensal (preço cheio) + trimestral (-8%) +
+  semestral (-15%) + anual (-20%, mesmo desconto que já era usado só
+  pro anual antes) - validados contra a pesquisa (Huggy ~20% anual,
+  JivoChat 15%, Wati 25%, Kommo ~8-14% via "meses bônus").
+- **`Pricing.tsx`** - seletor de ciclo virou 4 botões (era 2, Mensal/
+  Anual) e a grade de planos virou `sm:grid-cols-2` (era `lg:grid-cols-3`).
+  Preço exibido calculado na hora (`monthlyPrice * (1 - desconto)`),
+  com nota "R$X cobrado a cada N meses" pra ciclos não-mensais.
+- **`Faq.tsx`** - resposta do Puka Copilot atualizada pra "só no
+  Completo" (dizia "Professional e Enterprise"); pergunta nova sobre a
+  Agenda ser exclusiva do Completo (feature nova o suficiente pra
+  merecer objeção própria).
+- **`app/cadastro/page.tsx`** - `planLabels` (usado só pro badge
+  cosmético "Plano selecionado: X" na URL `?plano=`) atualizado pros
+  slugs novos (`essencial`/`completo`) - `SignupForm.tsx` continua sem
+  ler esse parâmetro pra decidir nada no payload real (mesmo
+  comportamento de antes, o backend sempre usa o plano default).
+- **Rodapé de Preços atualizado** - a nota antiga dizia que "os limites
+  de cada plano... dependem de combinado direto com a gente, não de um
+  bloqueio automático" - agora **parcialmente desatualizada**: a Agenda
+  já tem trava real no backend (`SchedulingRequiresCompletoPlanError`),
+  só funcionários/Copilot continuam sem enforcement. Texto ajustado pra
+  refletir essa diferença.
+- Testado: `npm run build`/`npm run lint` limpos.
+
 ## CORS — configuração necessária no backend
 
 O domínio deste site precisa estar em `CORS_ORIGINS` no `.env` do

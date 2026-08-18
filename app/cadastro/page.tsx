@@ -8,9 +8,8 @@ export const metadata: Metadata = {
 };
 
 const planLabels: Record<string, string> = {
-  starter: "Starter",
-  professional: "Professional",
-  enterprise: "Enterprise",
+  essencial: "Essencial",
+  completo: "Completo",
 };
 
 export default async function CadastroPage({

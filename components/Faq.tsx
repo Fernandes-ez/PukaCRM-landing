@@ -22,7 +22,12 @@ const faqs = [
   {
     question: "O Puka Copilot está em todos os planos?",
     answer:
-      "Só no Professional e no Enterprise. Ele entra em cena quando um consultor já assumiu a conversa — no Starter, sem essa etapa ainda, o foco é o essencial de IA de atendimento e CRM.",
+      "Só no Completo. Ele entra em cena quando um consultor já assumiu a conversa — no Essencial, sem essa etapa ainda, o foco é o essencial de IA de atendimento e CRM.",
+  },
+  {
+    question: "A Agenda de agendamentos está em todos os planos?",
+    answer:
+      "Só no Completo — inclusive a IA marcando horário sozinha durante a conversa, se você ativar essa opção. No Essencial, o foco continua sendo atendimento e CRM.",
   },
   {
     question: "Preciso de cartão de crédito pra testar?",
