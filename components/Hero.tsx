@@ -29,7 +29,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground text-balance">
-            Uma plataforma só pra atender clientes no WhatsApp com IA e
+            <strong className="font-semibold text-foreground">Puka CRM</strong> é uma
+            plataforma pra atender clientes no WhatsApp com inteligência artificial e
             organizar tudo num CRM — leads, conversas e equipe num lugar só.
             Feito pra academias, clínicas, escolas e negócios que vivem de
             atendimento.
