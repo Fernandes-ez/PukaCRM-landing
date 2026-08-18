@@ -299,9 +299,38 @@ genérica de IA.
   parte, não precisa de CNPJ nem cartão pra testar, e em quais planos o
   Copilot está.
 - **Cadastro** (`/cadastro`) — formulário mapeado no fluxo acima.
-- Rodapé: Termos de Uso e Política de Privacidade — **conteúdo ainda
-  placeholder**, precisa ser escrito (jurídico) antes do lançamento
-  público.
+- Rodapé: Termos de Uso e Política de Privacidade — `/termos` e
+  `/privacidade` (ver seção dedicada abaixo).
+
+## ✅ Escrito em 2026-08-19 — Termos de Uso e Política de Privacidade
+
+Motivador imediato: o Google exige uma URL pública de política de
+privacidade pra verificar o app OAuth usado na sincronização com Google
+Calendar (`crm-backend`, decisão #52) — mas o conteúdo também resolve a
+obrigação real de LGPD que já estava pendente desde a Fase 1 (`app/
+privacidade/page.tsx`/`app/termos/page.tsx` só tinham um placeholder
+"aguardando jurídico").
+
+- **Conteúdo grounded no código real**, não modelo genérico - reflete
+  exatamente o que o `crm-backend` coleta e processa hoje: dados de
+  Company/Employee/Lead, conteúdo de conversa (texto e áudio transcrito,
+  áudio nunca persistido - decisão #19), credenciais criptografadas
+  (Fernet)/senha com hash, os terceiros reais (Meta/WhatsApp, Google/
+  Gemini + Google Calendar, Asaas). Distingue papel de **controlador**
+  (dados da empresa contratante/funcionários) vs **operador** (dados dos
+  leads que a empresa contratante atende - ela decide a finalidade, o
+  Puka só processa).
+- **⚠️ Não é redação jurídica final** - é um rascunho tecnicamente
+  correto (baseado no sistema real, não em suposição), mas precisa de
+  revisão de advogado antes do lançamento público de verdade, dado o
+  risco real de multa da ANPD por LGPD malfeita. Mesma ressalva que já
+  existia no placeholder anterior.
+- E-mail de contato usa `contato@pukacrm.com.br` - mesmo endereço
+  placeholder já referenciado no CTA do Enterprise em `Pricing.tsx`
+  (ainda não existe de verdade, precisa virar um e-mail real antes do
+  lançamento, mesma pendência já registrada ali).
+- Testado: `npm run build`/`npm run lint` limpos, as duas rotas geradas
+  como páginas estáticas (`○ /privacidade`, `○ /termos`).
 
 **Ajuste de 2026-08-14**: `FinalCta.tsx` usava
 `bg-gradient-to-br from-brand-600 to-brand-800` — removido em favor de
