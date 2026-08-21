@@ -1,3 +1,5 @@
+import Reveal from "@/components/motion/Reveal";
+
 const steps = [
   {
     number: "01",
@@ -25,7 +27,7 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section id="como-funciona" className="mx-auto max-w-6xl px-6 py-24">
-      <div className="max-w-2xl">
+      <Reveal className="max-w-2xl">
         <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
           <span className="h-3 w-3 diagonal-lines" />
           Como funciona
@@ -37,7 +39,7 @@ export default function HowItWorks() {
           Sem perder contexto no meio do caminho — cada etapa entrega pra
           próxima exatamente o que ela precisa saber.
         </p>
-      </div>
+      </Reveal>
 
       <div className="relative mt-16 grid gap-8 sm:grid-cols-3">
         <svg
@@ -59,8 +61,12 @@ export default function HowItWorks() {
           />
         </svg>
 
-        {steps.map((step) => (
-          <div key={step.number} className={`${step.notch} border border-border bg-card p-8`}>
+        {steps.map((step, i) => (
+          <Reveal
+            key={step.number}
+            delay={i * 0.1}
+            className={`${step.notch} border border-border bg-card p-8`}
+          >
             <span className="text-sm font-semibold text-brand-600 dark:text-brand-400">
               {step.number}
             </span>
@@ -68,7 +74,7 @@ export default function HowItWorks() {
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               {step.description}
             </p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>

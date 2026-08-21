@@ -259,6 +259,70 @@ de rateio generalizado pra qualquer ciclo, migration de dados).
   refletir essa diferença.
 - Testado: `npm run build`/`npm run lint` limpos.
 
+## ✅ Layout da Home redesenhado com GSAP + Canvas, 2026-08-21
+
+Pedido do usuário: o Hero seguia o padrão mais comum de landing de SaaS
+gerado por IA (badge → headline → dois botões numa coluna de texto,
+mockup de app numa coluna ao lado, grid 2 colunas simétrico) — pediu pra
+tirar esse "layout padrão de IA" e dar uma cara mais única, usando
+gsap.com/motion.dev/threejs.org como referência de qualidade de
+animação.
+
+- **`gsap` (com `ScrollTrigger`) virou dependência real** — primeira
+  biblioteca de animação do projeto (`lib/gsap.ts`, registra o plugin
+  uma vez, client-only). **Não** foi adicionado Three.js/WebGL como
+  dependência — pesaria demais num site que depende de SEO/Core Web
+  Vitals (ver seção "Por que repositório separado" acima); o "efeito
+  Three.js" do fundo do Hero foi feito com **Canvas2D puro**
+  (`components/motion/ParticleField.tsx`) — pontos roxos à deriva
+  conectados por linhas quando próximos (constellation/network, no
+  espírito dos demos do threejs.org), sem nenhuma lib gráfica. Lê o
+  tema (`document.documentElement.classList.contains("dark")`) pra
+  trocar a paleta, respeita `prefers-reduced-motion` (desenha 1 frame
+  estático e para) e pausa quando a aba não está visível
+  (`visibilitychange`).
+- **`components/motion/Reveal.tsx`** — wrapper client genérico (fade +
+  translateY via `ScrollTrigger`, `once: true`) aplicado nos títulos e
+  nos cards de `HowItWorks`/`Features`/`CopilotSpotlight`/`UseCases`/
+  `Pricing`/`Faq`/`FinalCta`, com `delay` escalonado por índice pra dar
+  um stagger sutil entre itens de grid — mesma textura de movimento em
+  todas as seções, não só no Hero.
+- **`components/motion/ScrollTriggerRefresh.tsx`** (montado uma vez em
+  `app/layout.tsx`) — força um `ScrollTrigger.refresh()` depois que a
+  árvore inteira montou e depois que as fontes carregam
+  (`document.fonts.ready`). Sem isso, a posição de início de cada
+  `Reveal` é calculada na primeira passada, que pode não bater com o
+  layout final se fontes carregarem depois — mais teórico que
+  observado na prática, mas barato de garantir.
+- **Hero (`components/Hero.tsx`) redesenhado**: manteve a mesma grade
+  assimétrica 2 colunas (mais fácil de manter responsivo que um layout
+  livre/absoluto), mas: tipografia bem maior (`lg:text-[4.25rem]`, era
+  `sm:text-6xl`), headline dividida em 3 linhas (`data-hero-line`) que
+  entram em stagger na carga da página (não é scroll, é a primeira
+  coisa que a pessoa vê), mockup do WhatsApp rotacionado (-2°) e com
+  "sangria" pra fora da própria coluna (`-mr-4`, `w-[104%]`) em vez de
+  ficar preso dentro de uma caixa simétrica, mais um parallax sutil
+  dele mesmo durante o scroll (`ScrollTrigger` com `scrub`). Fundo
+  ganhou o `ParticleField` (constellation) camadas com o `.dot-grid-soft`
+  que já existia, os dois com máscara de gradiente pra sumir antes do
+  fim da seção.
+- **Testado**: `npm run build`/`npm run lint` limpos. Verificado
+  visualmente via screenshot headless (Chrome `--headless=new`) em
+  claro/escuro e em mobile (390px) — **achado importante testando**: um
+  `--screenshot` de tiro único captura no evento `load`, que pode
+  acontecer ANTES da hidratação/dos efeitos do React rodarem (a página
+  fica com o `opacity:0` que o SSR manda por padrão, só corrigido depois
+  por JS) — isso pareceu um bug real (conteúdo "sumindo") em várias
+  tentativas, até confirmar via `--dump-dom` que o DOM real já estava
+  com `opacity:1` correto; o sintoma era só do método de teste (timing
+  de screenshot), não do código. Pra validar de verdade, usei
+  `--force-prefers-reduced-motion` (bypassa os tweens, mostra o estado
+  final na hora) — nesse modo tudo renderizou certo de primeira. Vale
+  registrar caso alguém repita esse tipo de teste automatizado depois.
+- **Fora de escopo**: não mexeu no conteúdo/copy de nenhuma seção, só
+  layout/composição/movimento. Three.js real (WebGL) ficou de fora de
+  propósito, ver acima.
+
 ## CORS — configuração necessária no backend
 
 O domínio deste site precisa estar em `CORS_ORIGINS` no `.env` do

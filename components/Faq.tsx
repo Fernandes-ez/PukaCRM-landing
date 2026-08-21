@@ -1,3 +1,5 @@
+import Reveal from "@/components/motion/Reveal";
+
 const faqs = [
   {
     question: "Isso é WhatsApp Web com QR Code?",
@@ -12,7 +14,7 @@ const faqs = [
   {
     question: "Preciso pagar a Meta separado da mensalidade?",
     answer:
-      "No dia a dia, não: mensagens com quem te procura primeiro no WhatsApp são gratuitas, dentro de uma cota mensal que a própria Meta libera. Só mensagens de campanha (Marketing) têm custo por envio cobrado direto pela Meta — nesta fase inicial, isso é combinado caso a caso com o nosso time, não é um valor que cai sozinho na sua fatura.",
+      "No dia a dia, não: qualquer resposta de texto normal a quem te procura primeiro no WhatsApp é gratuita e sem limite. Só quando a plataforma manda uma mensagem de Template pra retomar contato fora de uma conversa em andamento — campanha de Marketing ou o lembrete automático de agendamento — é que a Meta cobra por envio. Nesta fase inicial, isso é combinado caso a caso com o nosso time, não é um valor que cai sozinho na sua fatura.",
   },
   {
     question: "Preciso de CNPJ pra começar?",
@@ -39,7 +41,7 @@ const faqs = [
 export default function Faq() {
   return (
     <section id="perguntas" className="mx-auto max-w-3xl px-6 py-24">
-      <div className="text-center">
+      <Reveal className="text-center">
         <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
           <span className="h-3 w-3 diagonal-lines" />
           Perguntas frequentes
@@ -47,9 +49,9 @@ export default function Faq() {
         <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
           Antes de começar
         </h2>
-      </div>
+      </Reveal>
 
-      <div className="mt-12 divide-y divide-border border-y border-border">
+      <Reveal delay={0.1} className="mt-12 divide-y divide-border border-y border-border">
         {faqs.map((faq) => (
           <details key={faq.question} className="group py-5 first:pt-0 last:pb-0">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold marker:content-none">
@@ -74,7 +76,7 @@ export default function Faq() {
             </p>
           </details>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }

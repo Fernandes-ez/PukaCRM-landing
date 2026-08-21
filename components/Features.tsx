@@ -1,3 +1,5 @@
+import Reveal from "@/components/motion/Reveal";
+
 const features = [
   {
     title: "Atendimento por IA configurável",
@@ -48,7 +50,7 @@ export default function Features() {
     <section id="funcionalidades" className="relative bg-muted/40">
       <div className="divider-stripes" />
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
             <span className="h-3 w-3 diagonal-lines" />
             Funcionalidades
@@ -60,12 +62,13 @@ export default function Features() {
             IA e CRM trabalhando juntos, sem depender de mais três
             ferramentas coladas com fita adesiva.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2">
-          {features.map((feature) => (
-            <div
+          {features.map((feature, i) => (
+            <Reveal
               key={feature.title}
+              delay={(i % 2) * 0.1}
               className={`${feature.notch} flex gap-4 border border-border bg-card p-6`}
             >
               <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-md border border-brand-200 dark:border-brand-800">
@@ -80,7 +83,7 @@ export default function Features() {
                   {feature.description}
                 </p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

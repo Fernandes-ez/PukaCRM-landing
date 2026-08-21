@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Reveal from "@/components/motion/Reveal";
 
 type Cycle = "monthly" | "quarterly" | "semiannual" | "annual";
 
@@ -102,7 +103,7 @@ export default function Pricing() {
     <section id="precos" className="relative bg-muted/40">
       <div className="divider-stripes" />
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="text-center">
+        <Reveal className="text-center">
           <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
             <span className="h-3 w-3 diagonal-lines" />
             Preços
@@ -136,10 +137,10 @@ export default function Pricing() {
               </button>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         <div className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2 sm:items-start">
-          {plans.map((plan) => {
+          {plans.map((plan, i) => {
             const ctaClassName = `btn-cut mt-8 block px-6 py-3 text-center text-sm font-semibold transition-colors ${
               plan.highlight
                 ? "bg-brand-600 text-white hover:bg-brand-700"
@@ -151,8 +152,9 @@ export default function Pricing() {
             const totalCharge = Math.round(plan.monthlyPrice * CYCLE_MONTHS[cycle] * (1 - discount));
 
             return (
-              <div
+              <Reveal
                 key={plan.slug}
+                delay={i * 0.12}
                 className={`${plan.notch} relative flex flex-col border bg-card p-8 ${
                   plan.highlight
                     ? "border-brand-400 dark:border-brand-600 sm:-my-3 sm:py-11"
@@ -231,7 +233,7 @@ export default function Pricing() {
                 <Link href={plan.cta.href} className={ctaClassName}>
                   {plan.cta.label}
                 </Link>
-              </div>
+              </Reveal>
             );
           })}
         </div>

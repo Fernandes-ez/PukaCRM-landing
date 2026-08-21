@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Reveal from "@/components/motion/Reveal";
 
 export default function FinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-24">
-      <div className="notch-both relative overflow-hidden bg-brand-800 px-8 py-16 text-center sm:px-16">
+      <Reveal className="notch-both relative overflow-hidden bg-brand-800 px-8 py-16 text-center sm:px-16">
         <div className="absolute inset-0 dot-grid-invert opacity-70" aria-hidden />
         <div className="absolute inset-x-0 top-0 h-1.5 diagonal-lines-accent" aria-hidden />
         <h2 className="relative text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -21,7 +22,7 @@ export default function FinalCta() {
             Comece grátis
           </Link>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

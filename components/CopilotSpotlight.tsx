@@ -1,8 +1,10 @@
+import Reveal from "@/components/motion/Reveal";
+
 export default function CopilotSpotlight() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-24">
       <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="relative order-2 lg:order-1">
+        <Reveal y={20} className="relative order-2 lg:order-1">
           <div className="notch-both relative overflow-hidden border border-border bg-card p-6">
             <div className="absolute inset-0 dot-grid-soft opacity-[0.35]" />
 
@@ -50,9 +52,9 @@ export default function CopilotSpotlight() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="order-1 lg:order-2">
+        <Reveal delay={0.15} className="order-1 lg:order-2">
           <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-accent-600 uppercase dark:text-accent-400">
             <span className="h-3 w-3 diagonal-lines-accent" />
             Puka Copilot
@@ -89,7 +91,7 @@ export default function CopilotSpotlight() {
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
