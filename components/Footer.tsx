@@ -4,11 +4,11 @@ import BrandLogo from "@/components/BrandLogo";
 export default function Footer() {
   return (
     <footer className="bg-muted/40">
-      <div className="divider-stripes" />
+      <div className="h-px bg-border" />
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
           <div className="max-w-sm">
-            <BrandLogo iconSize={28} />
+            <BrandLogo />
             <p className="mt-2 text-sm text-muted-foreground">
               Atendimento no WhatsApp com IA e CRM completo pra pequenas e
               médias empresas.
@@ -65,7 +65,7 @@ export default function Footer() {
           <span className="font-semibold tracking-tight text-foreground">
             Feito por{" "}
             <span className="text-muted-foreground">{"{"}</span>
-            ezf<span className="text-brand-600 dark:text-brand-400">.tech</span>
+            ezf<span className="text-ribalta-funda dark:text-ribalta-acesa">.tech</span>
             <span className="text-muted-foreground">{"}"}</span>
           </span>
         </div>

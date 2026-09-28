@@ -12,7 +12,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Alternar tema claro/escuro"
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400"
+      className="flex h-9 w-9 items-center justify-center border border-border text-foreground transition-colors hover:border-ribalta-funda hover:text-ribalta-funda dark:hover:border-ribalta-acesa dark:hover:text-ribalta-acesa"
     >
       <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="hidden h-4.5 w-4.5 dark:block">
         <circle cx="12" cy="12" r="4.5" />

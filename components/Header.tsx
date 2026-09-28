@@ -51,10 +51,7 @@ export default function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Link
-            href="/cadastro"
-            className="btn-cut bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-600/30 transition-colors hover:bg-brand-700"
-          >
+          <Link href="/cadastro" className="btn-primary px-5 py-2.5 text-sm transition-colors">
             Comece grátis
           </Link>
         </div>
@@ -68,7 +65,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border"
+            className="flex h-9 w-9 items-center justify-center border border-border"
           >
             <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4.5 w-4.5">
               {open ? (
@@ -97,7 +94,7 @@ export default function Header() {
             <Link
               href="/cadastro"
               onClick={() => setOpen(false)}
-              className="btn-cut mt-3 bg-brand-600 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-brand-700"
+              className="btn-primary mt-3 px-4 py-2.5 text-center text-sm"
             >
               Comece grátis
             </Link>
