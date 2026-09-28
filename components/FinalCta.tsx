@@ -4,21 +4,29 @@ import Reveal from "@/components/motion/Reveal";
 export default function FinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-24">
-      <Reveal className="notch-both relative overflow-hidden bg-brand-800 px-8 py-16 text-center sm:px-16">
-        <div className="absolute inset-0 dot-grid-invert opacity-70" aria-hidden />
-        <div className="absolute inset-x-0 top-0 h-1.5 diagonal-lines-accent" aria-hidden />
-        <h2 className="relative text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      <Reveal className="relative overflow-hidden bg-coxia px-8 py-16 text-center sm:px-16">
+        {/* A deixa (curva da marca), sangrando pela borda direita — ver
+            puka-marca/logo/puka-simbolo-cor.svg. */}
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          viewBox="33 -694 479 694"
+          className="pointer-events-none absolute top-0 right-0 h-full w-auto opacity-90"
+        >
+          <g transform="scale(1 -1)">
+            <path fill="#E8704A" d="M364 527C318 450 221.02 344 221.02 270C221.02 192 280 86 312 0H512C458 92 386 180 386 262C386 334 452 440 498 527Z" />
+          </g>
+        </svg>
+
+        <h2 className="relative font-display text-3xl font-bold tracking-tight text-roteiro sm:text-4xl">
           Pronto pra deixar a IA cuidar do primeiro contato?
         </h2>
-        <p className="relative mx-auto mt-4 max-w-xl text-lg text-brand-100">
+        <p className="relative mx-auto mt-4 max-w-xl text-lg text-roteiro/80">
           Cadastre sua empresa em poucos minutos e comece a atender no
           WhatsApp com IA hoje mesmo.
         </p>
         <div className="relative mt-8">
-          <Link
-            href="/cadastro"
-            className="btn-cut inline-block bg-white px-8 py-3.5 text-base font-semibold text-brand-700 transition-colors hover:bg-brand-50"
-          >
+          <Link href="/cadastro" className="inline-block bg-roteiro px-8 py-3.5 text-base font-semibold text-coxia transition-colors hover:bg-papel">
             Comece grátis
           </Link>
         </div>

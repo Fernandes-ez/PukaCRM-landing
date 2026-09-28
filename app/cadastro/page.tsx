@@ -31,7 +31,7 @@ export default async function CadastroPage({
           painel pra configurar o atendimento.
         </p>
         {planLabel && (
-          <p className="mt-4 inline-flex items-center gap-2 border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 dark:border-brand-800 dark:bg-brand-950 dark:text-brand-300">
+          <p className="mt-4 inline-flex items-center gap-2 border border-border bg-muted px-3 py-1 text-xs font-semibold text-foreground">
             Plano selecionado: {planLabel}
           </p>
         )}

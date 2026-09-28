@@ -42,11 +42,11 @@ export default function Faq() {
   return (
     <section id="perguntas" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal className="text-center">
-        <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
-          <span className="h-3 w-3 diagonal-lines" />
+        <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-ribalta-funda uppercase dark:text-ribalta-acesa">
+          <span className="eyebrow-haste" />
           Perguntas frequentes
         </span>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
           Antes de começar
         </h2>
       </Reveal>

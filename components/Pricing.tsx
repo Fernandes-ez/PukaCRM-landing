@@ -41,7 +41,6 @@ interface Plan {
   features: string[];
   excludedFeatures: string[];
   cta: { label: string; href: string };
-  notch: "notch-tr" | "notch-bl" | "notch-both";
   highlight?: boolean;
 }
 
@@ -69,7 +68,6 @@ const plans: Plan[] = [
     ],
     excludedFeatures: ["Agenda de agendamentos", "Puka Copilot"],
     cta: { label: "Comece grátis", href: "/cadastro?plano=essencial" },
-    notch: "notch-tr",
   },
   {
     slug: "completo",
@@ -91,7 +89,6 @@ const plans: Plan[] = [
     ],
     excludedFeatures: [],
     cta: { label: "Comece grátis", href: "/cadastro?plano=completo" },
-    notch: "notch-both",
     highlight: true,
   },
 ];
@@ -101,14 +98,14 @@ export default function Pricing() {
 
   return (
     <section id="precos" className="relative bg-muted/40">
-      <div className="divider-stripes" />
+      <div className="h-px bg-border" />
       <div className="mx-auto max-w-6xl px-6 py-24">
         <Reveal className="text-center">
-          <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-brand-600 uppercase dark:text-brand-400">
-            <span className="h-3 w-3 diagonal-lines" />
+          <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.2em] text-ribalta-funda uppercase dark:text-ribalta-acesa">
+            <span className="eyebrow-haste" />
             Preços
           </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl">
             Dois planos, do jeito que o seu atendimento precisa
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
@@ -118,7 +115,7 @@ export default function Pricing() {
           <div
             role="group"
             aria-label="Ciclo de cobrança"
-            className="mt-8 inline-flex flex-wrap items-center justify-center gap-1 rounded-full border border-border p-1"
+            className="mt-8 inline-flex flex-wrap items-center justify-center gap-1 border border-border p-1"
           >
             {(Object.keys(CYCLE_LABEL) as Cycle[]).map((c) => (
               <button
@@ -126,8 +123,8 @@ export default function Pricing() {
                 type="button"
                 aria-pressed={cycle === c}
                 onClick={() => setCycle(c)}
-                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-                  cycle === c ? "bg-brand-600 text-white" : "text-muted-foreground"
+                className={`px-4 py-1.5 text-sm font-semibold transition-colors ${
+                  cycle === c ? "bg-ribalta-funda text-papel dark:bg-ribalta-acesa dark:text-coxia" : "text-muted-foreground"
                 }`}
               >
                 {CYCLE_LABEL[c]}
@@ -141,10 +138,8 @@ export default function Pricing() {
 
         <div className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2 sm:items-start">
           {plans.map((plan, i) => {
-            const ctaClassName = `btn-cut mt-8 block px-6 py-3 text-center text-sm font-semibold transition-colors ${
-              plan.highlight
-                ? "bg-brand-600 text-white hover:bg-brand-700"
-                : "border border-border text-foreground hover:border-brand-400 hover:text-brand-600 dark:hover:text-brand-400"
+            const ctaClassName = `mt-8 block px-6 py-3 text-center text-sm transition-colors ${
+              plan.highlight ? "btn-primary" : "btn-secondary font-semibold"
             }`;
 
             const discount = CYCLE_DISCOUNT[cycle];
@@ -155,14 +150,12 @@ export default function Pricing() {
               <Reveal
                 key={plan.slug}
                 delay={i * 0.12}
-                className={`${plan.notch} relative flex flex-col border bg-card p-8 ${
-                  plan.highlight
-                    ? "border-brand-400 dark:border-brand-600 sm:-my-3 sm:py-11"
-                    : "border-border"
+                className={`relative flex flex-col border bg-card p-8 ${
+                  plan.highlight ? "border-border border-t-[6px] border-t-foreground sm:-my-3 sm:py-11" : "border-border"
                 }`}
               >
                 {plan.highlight && (
-                  <span className="mb-4 inline-block w-fit bg-brand-600 px-3 py-1 text-xs font-semibold tracking-wide text-white uppercase">
+                  <span className="mb-4 inline-block w-fit bg-foreground px-3 py-1 text-xs font-semibold tracking-wide text-background uppercase">
                     Recomendado
                   </span>
                 )}
@@ -195,7 +188,7 @@ export default function Pricing() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="none"
-                          stroke={highlightColor ? "var(--accent-500)" : "var(--brand-500)"}
+                          stroke={highlightColor ? "var(--puka-ribalta-funda)" : "var(--puka-ponto)"}
                           strokeWidth="2.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"

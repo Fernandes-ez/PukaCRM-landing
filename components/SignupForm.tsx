@@ -124,8 +124,8 @@ export default function SignupForm() {
   if (success) {
     const redirectUrl = loginUrl(form.owner_email);
     return (
-      <div className="notch-both border border-brand-200 bg-card p-8 text-center dark:border-brand-800">
-        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white">
+      <div className="border border-border bg-card p-8 text-center">
+        <span className="mx-auto flex h-12 w-12 items-center justify-center bg-ribalta-funda text-papel dark:bg-ribalta-acesa dark:text-coxia">
           <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
             <path d="M20 6 9 17l-5-5" />
           </svg>
@@ -135,10 +135,7 @@ export default function SignupForm() {
           Agora é só entrar com o e-mail <strong>{form.owner_email}</strong> pra
           começar a configurar o atendimento.
         </p>
-        <a
-          href={redirectUrl}
-          className="btn-cut mt-6 inline-block bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
-        >
+        <a href={redirectUrl} className="btn-primary mt-6 inline-block px-6 py-3 text-sm transition-colors">
           Ir para o login
         </a>
       </div>
@@ -257,7 +254,7 @@ export default function SignupForm() {
       </fieldset>
 
       {submitError && (
-        <p className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">
+        <p className="bg-danger/10 px-4 py-3 text-sm text-danger">
           {submitError}
         </p>
       )}
@@ -265,7 +262,7 @@ export default function SignupForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="btn-cut w-full bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm shadow-brand-600/30 transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-primary w-full px-6 py-3.5 text-base transition-colors disabled:cursor-not-allowed disabled:opacity-60"
       >
         {submitting ? "Enviando..." : "Criar conta grátis"}
       </button>
@@ -274,7 +271,7 @@ export default function SignupForm() {
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-lg border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 ${
+  return `w-full border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20 ${
     hasError ? "border-danger" : "border-border"
   }`;
 }
