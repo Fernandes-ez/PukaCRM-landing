@@ -1,24 +1,21 @@
-import Image from "next/image";
-
-export default function BrandLogo({
-  iconSize = 32,
-  textClassName = "text-lg",
-}: {
-  iconSize?: number;
-  textClassName?: string;
-}) {
+/** Logo oficial da marca — nunca recriar com texto/fonte, ver puka-marca/puka-manual.html. */
+export default function BrandLogo({ height = 28 }: { height?: number }) {
   return (
-    <span className="flex items-center gap-2">
-      <Image
-        src="/logo-icon.png"
-        alt="Puka CRM"
-        width={iconSize}
-        height={iconSize}
-        priority
+    <>
+      <img
+        src="/brand/puka-principal-cor.svg"
+        alt="Puka"
+        height={height}
+        style={{ height, width: "auto" }}
+        className="dark:hidden"
       />
-      <span className={`font-semibold ${textClassName}`}>
-        Puka <span className="text-brand-600 dark:text-brand-400">CRM</span>
-      </span>
-    </span>
+      <img
+        src="/brand/puka-principal-negativo.svg"
+        alt="Puka"
+        height={height}
+        style={{ height, width: "auto" }}
+        className="hidden dark:block"
+      />
+    </>
   );
 }
