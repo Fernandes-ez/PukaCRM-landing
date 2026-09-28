@@ -2,20 +2,21 @@ import Reveal from "@/components/motion/Reveal";
 
 // Ícones do set da marca (puka-marca/icones/), traço 2px, currentColor —
 // partes retas (stroke-linecap="butt") = haste, partes curvas (round) = deixa.
-const features = [
-  {
-    title: "Atendimento por IA configurável",
-    description:
-      "Defina tom de voz, o que a IA pode responder e quando ela deve transferir a conversa pra um humano.",
-    icon: (
-      <>
-        <path d="M5.5 3.5V20.5" strokeLinecap="butt" strokeLinejoin="miter" />
-        <path d="M10 9C11.4 10.6 11.4 13.4 10 15" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M13.5 6.5C16.4 9.5 16.4 14.5 13.5 17.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M17 4C21.2 8.4 21.2 15.6 17 20" strokeLinecap="round" strokeLinejoin="round" />
-      </>
-    ),
-  },
+const featured = {
+  title: "Atendimento por IA configurável",
+  description:
+    "Defina tom de voz, o que a IA pode responder e quando ela deve transferir a conversa pra um humano. É o primeiro contato do seu negócio, treinado do seu jeito.",
+  icon: (
+    <>
+      <path d="M5.5 3.5V20.5" strokeLinecap="butt" strokeLinejoin="miter" />
+      <path d="M10 9C11.4 10.6 11.4 13.4 10 15" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.5 6.5C16.4 9.5 16.4 14.5 13.5 17.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M17 4C21.2 8.4 21.2 15.6 17 20" strokeLinecap="round" strokeLinejoin="round" />
+    </>
+  ),
+};
+
+const rest = [
   {
     title: "CRM de leads integrado",
     description:
@@ -31,7 +32,7 @@ const features = [
   {
     title: "Distribuição entre a equipe",
     description:
-      "Conversas que precisam de humano chegam pra pessoa certa, na fila certa — respeitando o horário de trabalho e o limite de atendimentos simultâneos de cada atendente.",
+      "Conversas que precisam de humano chegam pra pessoa certa, na fila certa — respeitando horário de trabalho e limite de atendimentos simultâneos.",
     icon: (
       <>
         <path d="M3 20.5H21" strokeLinecap="butt" strokeLinejoin="miter" />
@@ -59,14 +60,13 @@ const features = [
   {
     title: "Controle de acesso por cargo",
     description:
-      "Cargos prontos pra usar — Dono, Administrador, Supervisor, Consultora e Recepção — cada um vendo só o que precisa. Crie os seus se quiser algo diferente.",
-    // Fora do set oficial ainda — listar pra desenhar versão própria.
+      "Cargos prontos pra usar — Dono, Administrador, Supervisor, Consultora e Recepção. Crie os seus se quiser algo diferente.",
     icon: <path d="M4 4h16v16H4V4Z M12 8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z M7.5 17c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4" strokeLinecap="round" strokeLinejoin="round" />,
   },
   {
     title: "Conexão oficial com o WhatsApp",
     description:
-      "Integração pela API oficial da Meta pro WhatsApp Business — sem QR Code nem gambiarra que arrisca banir o número da sua empresa.",
+      "API oficial da Meta pro WhatsApp Business — sem QR Code nem gambiarra que arrisca banir o número da sua empresa.",
     icon: (
       <>
         <path d="M7.5 15.5H4V4.5H20V15.5H12.5" strokeLinecap="butt" strokeLinejoin="miter" />
@@ -95,22 +95,50 @@ export default function Features() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2">
-          {features.map((feature, i) => (
-            <Reveal key={feature.title} delay={(i % 2) * 0.1} className="flex gap-4 bg-card p-6">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-border text-ribalta-funda dark:text-ribalta-acesa">
-                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5">
-                  {feature.icon}
-                </svg>
-              </span>
-              <div>
-                <h3 className="font-semibold">{feature.title}</h3>
-                <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
-                  {feature.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_1.15fr] lg:items-stretch">
+          {/* Painel gigante — a deixa da marca sangrando pela borda, único
+              elemento com curva nesta seção (regra 01: uma deixa por peça). */}
+          <Reveal className="relative overflow-hidden border border-border bg-card p-8 lg:p-10">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              viewBox="33 -694 479 694"
+              className="pointer-events-none absolute -right-10 -bottom-16 h-[80%] w-auto opacity-[0.07] dark:opacity-[0.1]"
+            >
+              <g transform="scale(1 -1)">
+                <path fill="var(--puka-ribalta)" d="M364 527C318 450 221.02 344 221.02 270C221.02 192 280 86 312 0H512C458 92 386 180 386 262C386 334 452 440 498 527Z" />
+              </g>
+            </svg>
+            <span className="relative flex h-14 w-14 items-center justify-center border border-border text-ribalta-funda dark:text-ribalta-acesa">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-7 w-7">
+                {featured.icon}
+              </svg>
+            </span>
+            <h3 className="relative mt-6 font-display text-2xl font-bold tracking-tight">{featured.title}</h3>
+            <p className="relative mt-3 max-w-sm text-base leading-7 text-muted-foreground">
+              {featured.description}
+            </p>
+          </Reveal>
+
+          {/* Lista compacta — hastes horizontais dividindo, não caixas
+              repetidas. */}
+          <div className="divide-y divide-border border border-border bg-card">
+            {rest.map((feature, i) => (
+              <Reveal key={feature.title} delay={0.08 + i * 0.06} className="flex gap-4 p-6">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center text-ribalta-funda dark:text-ribalta-acesa">
+                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5">
+                    {feature.icon}
+                  </svg>
+                </span>
+                <div>
+                  <h3 className="font-semibold">{feature.title}</h3>
+                  <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

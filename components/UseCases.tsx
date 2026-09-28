@@ -9,6 +9,11 @@ const segments = [
   { name: "Comércio em geral", detail: "Dúvidas de produto, pedido e pós-venda sem fila de espera." },
 ];
 
+// Alterna Ponto/Ribalta (IA/humano) e sobe-desce o traço — a mesma
+// "imperfeição controlada" do Padrão da marca (ver puka-manual.html,
+// seção 08), só que aplicada a conteúdo real em vez de decoração solta.
+const OFFSET = ["lg:-mt-5", "lg:mt-7", "lg:-mt-2", "lg:mt-8", "lg:-mt-6", "lg:mt-3"];
+
 export default function UseCases() {
   return (
     <section id="casos-de-uso" className="mx-auto max-w-6xl px-6 py-24">
@@ -26,14 +31,18 @@ export default function UseCases() {
         </p>
       </Reveal>
 
-      <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-20 grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-8 lg:flex lg:gap-x-6 lg:divide-x lg:divide-border">
         {segments.map((segment, i) => (
           <Reveal
             key={segment.name}
             delay={(i % 3) * 0.08}
-            className="border border-border bg-card p-6 transition-colors hover:border-ribalta-funda dark:hover:border-ribalta-acesa"
+            className={`lg:flex-1 lg:pl-6 lg:first:pl-0 ${OFFSET[i]}`}
           >
-            <h3 className="font-semibold">{segment.name}</h3>
+            <span
+              className="block h-8 w-1"
+              style={{ background: i % 2 === 0 ? "var(--puka-ponto)" : "var(--puka-ribalta-funda)" }}
+            />
+            <h3 className="mt-4 font-semibold">{segment.name}</h3>
             <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
               {segment.detail}
             </p>
