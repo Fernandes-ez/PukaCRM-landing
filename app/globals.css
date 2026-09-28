@@ -5,49 +5,43 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Brand — escala derivada de #C908F9 (hue 288). --brand-600 é a cor de marca. */
-  --brand-50: #faf3fb;
-  --brand-100: #f3e4f7;
-  --brand-200: #ebc2f5;
-  --brand-300: #e588fc;
-  --brand-400: #d84cfb;
-  --brand-500: #c908f9;
-  --brand-600: #b105db;
-  --brand-700: #9004b3;
-  --brand-800: #740490;
-  --brand-900: #600377;
-  --brand-950: #3a0547;
+  /* Marca "a deixa" — ver puka-marca/puka-manual.html. Ponto (azul) = IA,
+     Ribalta (laranja) = humano — nunca inverter esse par em nenhum lugar
+     do site. */
+  --puka-roteiro: #f4eee4;
+  --puka-coxia: #1e1b24;
+  --puka-ponto: #2d3f9e;
+  --puka-ribalta: #d2502d;
+  --puka-ribalta-funda: #a83a1c;
+  --puka-ribalta-acesa: #e8704a;
+  --puka-ponto-claro: #8e9be0;
+  --puka-rotunda: #e6dccb;
+  --puka-bastidor: #5e5868;
+  --puka-papel: #fbf8f2;
+  --puka-linha: #d9cdb9;
 
-  /* Accent — ciano análogo, usado com moderação em destaques/badges pra não
-     competir com o roxo de marca. */
-  --accent-400: #4cd9fb;
-  --accent-500: #17c4f4;
-  --accent-600: #0da4d0;
-
-  /* Neutros com leve matiz de roxo, pra combinar com a marca em vez de
-     usar um cinza puro. */
-  --background: #ffffff;
-  --foreground: #1c1526;
-  --card: #ffffff;
-  --card-foreground: #1c1526;
-  --muted: #f6f1f9;
-  --muted-foreground: #6b6178;
-  --border: #e9ddf0;
-  --ring: var(--brand-500);
+  --background: var(--puka-roteiro);
+  --foreground: var(--puka-coxia);
+  --card: var(--puka-papel);
+  --card-foreground: var(--puka-coxia);
+  --muted: var(--puka-rotunda);
+  --muted-foreground: var(--puka-bastidor);
+  --border: var(--puka-linha);
+  --ring: var(--puka-ponto);
 
   --success: #16a34a;
   --danger: #dc2626;
 }
 
 .dark {
-  --background: #121016;
-  --foreground: #f1ecf6;
-  --card: #1a1620;
-  --card-foreground: #f1ecf6;
-  --muted: #211b29;
-  --muted-foreground: #a79bb3;
-  --border: #2c2434;
-  --ring: var(--brand-400);
+  --background: var(--puka-coxia);
+  --foreground: var(--puka-roteiro);
+  --card: #2a2632;
+  --card-foreground: var(--puka-roteiro);
+  --muted: #2a2632;
+  --muted-foreground: #b6acc1;
+  --border: #3a3444;
+  --ring: var(--puka-ponto-claro);
 
   --success: #22c55e;
   --danger: #f87171;
@@ -65,24 +59,30 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
 
-  --color-brand-50: var(--brand-50);
-  --color-brand-100: var(--brand-100);
-  --color-brand-200: var(--brand-200);
-  --color-brand-300: var(--brand-300);
-  --color-brand-400: var(--brand-400);
-  --color-brand-500: var(--brand-500);
-  --color-brand-600: var(--brand-600);
-  --color-brand-700: var(--brand-700);
-  --color-brand-800: var(--brand-800);
-  --color-brand-900: var(--brand-900);
-  --color-brand-950: var(--brand-950);
+  /* Cores semânticas da marca — disponíveis como utilitários Tailwind
+     (bg-ponto, text-ribalta-funda etc), sempre pelo par IA=Ponto /
+     humano=Ribalta, nunca trocado. */
+  --color-ponto: var(--puka-ponto);
+  --color-ponto-claro: var(--puka-ponto-claro);
+  --color-ribalta: var(--puka-ribalta);
+  --color-ribalta-funda: var(--puka-ribalta-funda);
+  --color-ribalta-acesa: var(--puka-ribalta-acesa);
+  --color-coxia: var(--puka-coxia);
+  --color-roteiro: var(--puka-roteiro);
+  --color-rotunda: var(--puka-rotunda);
+  --color-bastidor: var(--puka-bastidor);
+  --color-papel: var(--puka-papel);
 
-  --color-accent-400: var(--accent-400);
-  --color-accent-500: var(--accent-500);
-  --color-accent-600: var(--accent-600);
+  --font-sans: var(--font-atkinson);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-atkinson-mono);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Corte seco, raio zero — única exceção é o círculo de avatar, que usa
+     rounded-full direto no componente, não este token. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 }
 
 body {
@@ -91,15 +91,10 @@ body {
 }
 
 ::selection {
-  background: var(--brand-300);
-  color: var(--brand-950);
+  background: var(--puka-ribalta);
+  color: var(--puka-papel);
 }
 
-/* Foco de teclado visível em todo elemento focável — 2px de contorno
-   com cor de bom contraste (--ring), não o outline finíssimo padrão
-   do navegador. .btn-cut tem sua própria regra logo abaixo: clip-path
-   corta qualquer parte do outline/box-shadow que caia fora da forma
-   cortada, então o outline normal fica quase invisível nesses botões. */
 @layer base {
   a:focus-visible,
   button:focus-visible,
@@ -107,9 +102,8 @@ body {
   select:focus-visible,
   textarea:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
   }
 }
 
@@ -125,162 +119,99 @@ body {
 }
 
 /* ============================================================
-   "Sinal diagonal" — motivo de marca recorrente (barras a 135°),
-   usado no logo, cortes de cartão, divisores e botões, no lugar
-   de blobs/pills genéricos. Ver components/Diagonal.tsx.
-
-   Tudo abaixo vive em @layer components: sem isso, essas classes
-   ficam "sem camada" e batem qualquer utilitário do Tailwind
-   (ex.: .absolute), não importa a ordem no arquivo — cascade
-   layers dão prioridade a regras sem @layer sobre as que têm.
+   Sistema "a deixa" — três peças tiradas do "k" do logo: haste (reta,
+   o sistema), deixa (curva à mão, a pessoa) e lacuna (o espaço entre
+   as duas, o momento da passagem). Ver puka-marca/puka-manual.html.
    ============================================================ */
 
 @layer components {
-  .diagonal-lines {
-    background-image: repeating-linear-gradient(
-      135deg,
-      var(--brand-500) 0px,
-      var(--brand-500) 2px,
-      transparent 2px,
-      transparent 14px
-    );
+  /* Marcador de seção — uma haste antes do rótulo, no lugar de ícone
+     decorativo. Usado em todo eyebrow (Como funciona, Funcionalidades,
+     Casos de uso, Preços, Perguntas). */
+  .eyebrow-haste {
+    display: inline-block;
+    width: 5px;
+    height: 1em;
+    flex-shrink: 0;
+    background: currentColor;
   }
 
-  .diagonal-lines-soft {
-    background-image: repeating-linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--brand-500) 45%, transparent) 0px,
-      color-mix(in srgb, var(--brand-500) 45%, transparent) 1.5px,
-      transparent 1.5px,
-      transparent 13px
-    );
+  /* Linha de passagem — o momento de handoff (IA → humano). Segmento
+     reto em Ponto, lacuna, segmento curvo/à mão em Ribalta com ponta
+     arredondada. Usada como divisor entre etapas/mensagens, nunca como
+     decoração solta. */
+  .linha-passagem {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
   }
-
-  .diagonal-lines-accent {
-    background-image: repeating-linear-gradient(
-      135deg,
-      var(--accent-500) 0px,
-      var(--accent-500) 2px,
-      transparent 2px,
-      transparent 14px
-    );
-  }
-
-  /* Grade de pontos — segundo motivo de marca, usado como textura de
-     fundo (hero, banner final) em vez das listras diagonais, que
-     ficam reservadas pro corte de cartões/botões. */
-  .dot-grid {
-    background-image: radial-gradient(var(--brand-500) 1.6px, transparent 1.6px);
-    background-size: 22px 22px;
-  }
-
-  .dot-grid-soft {
-    background-image: radial-gradient(
-      color-mix(in srgb, var(--brand-500) 60%, transparent) 1.6px,
-      transparent 1.6px
-    );
-    background-size: 22px 22px;
-  }
-
-  /* Pontos claros — para uso sobre fundos escuros/roxos, onde os pontos
-     na cor de marca perderiam contraste. */
-  .dot-grid-invert {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 1.6px, transparent 1.6px);
-    background-size: 22px 22px;
-  }
-
-  /* Corta o canto superior-direito e preenche o recorte com o padrão
-     diagonal — a "assinatura" visual dos cartões deste site. */
-  .notch-tr {
-    position: relative;
-    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
-  }
-  .notch-tr::before {
+  .linha-passagem::before {
     content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 26px;
-    height: 26px;
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
-    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+    flex: 1 1 auto;
+    height: 2px;
+    background: var(--puka-ponto);
   }
-
-  /* Variante espelhada — canto inferior-esquerdo — usada alternadamente
-     pra quebrar a repetição de uma grade toda igual. */
-  .notch-bl {
-    position: relative;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 26px 100%, 0 calc(100% - 26px));
-  }
-  .notch-bl::before {
+  .linha-passagem::after {
     content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 26px;
-    height: 26px;
-    clip-path: polygon(0 100%, 0 0, 100% 100%);
-    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+    flex: 1 1 auto;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--puka-ribalta-funda);
+  }
+  .dark .linha-passagem::before {
+    background: var(--puka-ponto-claro);
+  }
+  .dark .linha-passagem::after {
+    background: var(--puka-ribalta-acesa);
   }
 
-  /* Corta os dois cantos opostos ao mesmo tempo — usada isoladamente em
-     painéis de destaque (não combinável com .notch-tr/.notch-bl, que
-     competiriam pela mesma propriedade clip-path). */
-  .notch-both {
-    position: relative;
-    clip-path: polygon(
-      0 0,
-      calc(100% - 26px) 0,
-      100% 26px,
-      100% calc(100% - 26px),
-      calc(100% - 26px) 100%,
-      26px 100%,
-      0 calc(100% - 26px),
-      0 26px
-    );
+  .btn-primary {
+    background: var(--puka-ribalta-funda);
+    color: var(--puka-papel);
+    font-weight: 700;
   }
-  .notch-both::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 26px;
-    height: 26px;
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
-    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+  .btn-primary:hover {
+    background: color-mix(in srgb, var(--puka-ribalta-funda) 85%, black);
   }
-  .notch-both::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 26px;
-    height: 26px;
-    clip-path: polygon(0 100%, 0 0, 100% 100%);
-    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 3px, transparent 3px 7px);
+  .dark .btn-primary {
+    background: var(--puka-ribalta-acesa);
+    color: var(--puka-coxia);
+  }
+  .dark .btn-primary:hover {
+    background: color-mix(in srgb, var(--puka-ribalta-acesa) 88%, white);
   }
 
-  /* Botão com cantos cortados a 45° — no lugar do pill-button padrão. */
-  .btn-cut {
-    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  .btn-secondary {
+    background: transparent;
+    color: var(--foreground);
+    border: 2px solid var(--puka-coxia);
+  }
+  .btn-secondary:hover {
+    border-color: var(--puka-ribalta-funda);
+    color: var(--puka-ribalta-funda);
+  }
+  .dark .btn-secondary {
+    border-color: var(--puka-roteiro);
+  }
+  .dark .btn-secondary:hover {
+    border-color: var(--puka-ribalta-acesa);
+    color: var(--puka-ribalta-acesa);
   }
 
-  /* Tira de divisor entre seções — substitui a borda reta padrão. */
-  .divider-stripes {
-    height: 8px;
-    background-image: repeating-linear-gradient(135deg, var(--brand-500) 0 2px, transparent 2px 10px);
+  /* Única animação do site (ver regra 11 da Tarefa A): a deixa do logo do
+     hero desliza alguns pixels ao carregar. `prefers-reduced-motion` já
+     zera qualquer animation-duration globalmente (regra acima). */
+  @keyframes deixa-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
-}
-
-/* Fora de @layer de propósito: alguns botões .btn-cut também levam
-   utilitários de box-shadow do Tailwind (ex.: shadow-sm), que vivem em
-   @layer utilities — uma camada mais alta que @layer components sempre
-   vence, não importa a especificidade do :focus-visible. Deixando essa
-   regra sem camada, ela vence qualquer coisa em qualquer camada (mesma
-   lição do bug do .notch-both/.absolute). */
-.btn-cut:focus-visible {
-  outline: none;
-  box-shadow:
-    inset 0 0 0 2px var(--background),
-    inset 0 0 0 4px var(--ring);
+  .deixa-load-in {
+    animation: deixa-slide-in 0.6s 0.15s ease-out both;
+  }
 }
